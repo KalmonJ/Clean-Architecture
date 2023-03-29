@@ -1,5 +1,5 @@
-import { UserRepository } from "../domain/repositories/user.repository";
-import { UserNotFound } from "./../domain/errors/user-not-found.error";
+import { UserNotFound } from "../../domain/errors/user-not-found.error";
+import { UserRepository } from "../../domain/repositories/user.repository";
 
 export class UpdateUserUseCase {
   constructor(private userRepo: UserRepository) {}

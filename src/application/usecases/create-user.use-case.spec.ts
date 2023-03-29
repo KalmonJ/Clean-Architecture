@@ -1,6 +1,6 @@
-import { HashPassword } from "../domain/services/hash-password";
-import { IdGenerator } from "../domain/services/id-generator";
-import { UserInMemoryRepository } from "../infra/repositories/memory/user-in-memory-repository";
+import { HashPassword } from "../../domain/services/hash-password";
+import { IdGenerator } from "../../domain/services/id-generator";
+import { UserInMemoryRepository } from "../../infra/repositories/memory/user-in-memory-repository";
 import { InputUser, CreateUserUseCase } from "./create-user.use-case";
 
 describe("User use case test", () => {

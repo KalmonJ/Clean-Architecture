@@ -1,8 +1,8 @@
-import { InvalidCredentials } from "../domain/errors/invalid-credentials.error";
-import { UserNotFound } from "../domain/errors/user-not-found.error";
-import { AuthInterface } from "../domain/interfaces/auth.interface";
-import { HashPasswordInterface } from "../domain/interfaces/hash-password.interface";
-import { UserRepository } from "../domain/repositories/user.repository";
+import { InvalidCredentials } from "../../domain/errors/invalid-credentials.error";
+import { UserNotFound } from "../../domain/errors/user-not-found.error";
+import { AuthInterface } from "../../domain/interfaces/auth.interface";
+import { HashPasswordInterface } from "../../domain/interfaces/hash-password.interface";
+import { UserRepository } from "../../domain/repositories/user.repository";
 
 export class Login {
   constructor(

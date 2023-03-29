@@ -1,6 +1,6 @@
-import { CartInMemoryRepository } from "../infra/repositories/memory/cart-in-memory-repository";
+import { IdGenerator } from "../../domain/services/id-generator";
+import { CartInMemoryRepository } from "../../infra/repositories/memory/cart-in-memory-repository";
 import { CreateCartUseCase, InputCart } from "./create-cart.use-case";
-import { IdGenerator } from "./../domain/services/id-generator";
 
 describe("Create cart use case test", () => {
   it("Should create new cart", async () => {

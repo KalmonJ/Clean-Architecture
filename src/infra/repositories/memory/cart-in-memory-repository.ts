@@ -1,4 +1,3 @@
-import { InputCart } from "../../../application/create-cart.use-case";
 import { CartEntity } from "../../../domain/entities/cart.entity";
 import { CartRepositoryInterface } from "../../../domain/repositories/cart.repository";
 

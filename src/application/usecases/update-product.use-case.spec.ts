@@ -1,7 +1,8 @@
-import { IdGenerator } from "../domain/services/id-generator";
+import { IdGenerator } from "../../domain/services/id-generator";
 import { UpdateProductUseCase } from "./update-product.use-case";
 import { CreateProductUseCase, InputProduct } from "./create-product.use-case";
-import { ProductInMemoryRepository } from "../infra/repositories/memory/product-in-memory-repository";
+import { ProductInMemoryRepository } from "../../infra/repositories/memory/product-in-memory-repository";
+
 describe("Update product use case test", () => {
   it("Should update a product", async () => {
     const inputProduct: InputProduct = {
@@ -15,7 +16,6 @@ describe("Update product use case test", () => {
       repository,
       idGenerate
     );
-
     const product = await createProductUseCase.execute(inputProduct);
     const updateProductuseCase = new UpdateProductUseCase(repository);
     const id = ("id" in product && product.id) || "";

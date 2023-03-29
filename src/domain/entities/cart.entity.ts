@@ -1,4 +1,4 @@
-import { OutputProduct } from "../../application/create-product.use-case";
+import { OutputProduct } from "../../application/usecases/create-product.use-case";
 import { CartSizeError } from "../errors/cart-size.error";
 import { NegativePriceError } from "../errors/negative-price.error";
 

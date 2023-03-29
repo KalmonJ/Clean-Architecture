@@ -1,5 +1,5 @@
-import { IdGenerator } from "../domain/services/id-generator";
-import { ProductInMemoryRepository } from "../infra/repositories/memory/product-in-memory-repository";
+import { IdGenerator } from "../../domain/services/id-generator";
+import { ProductInMemoryRepository } from "../../infra/repositories/memory/product-in-memory-repository";
 import { CreateProductUseCase, InputProduct } from "./create-product.use-case";
 
 describe("Crate product use case", () => {

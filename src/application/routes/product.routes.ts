@@ -1,7 +1,7 @@
 import express, { Request, Router, Response } from "express";
 import { ExpressRouterInterface } from "../../domain/interfaces/express-router.interface";
-import { UpdateProductUseCase } from "../update-product.use-case";
-import { CreateProductUseCase } from "./../create-product.use-case";
+import { CreateProductUseCase } from "../usecases/create-product.use-case";
+import { UpdateProductUseCase } from "../usecases/update-product.use-case";
 
 export class ProductRoutes implements ExpressRouterInterface {
   constructor(

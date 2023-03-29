@@ -1,7 +1,7 @@
 import express, { Request, Response, Router } from "express";
 import { ExpressRouterInterface } from "../../domain/interfaces/express-router.interface";
-import { CreateUserUseCase } from "../create-user.use-case";
-import { UpdateUserUseCase } from "./../update-user.use-case";
+import { CreateUserUseCase } from "../usecases/create-user.use-case";
+import { UpdateUserUseCase } from "../usecases/update-user.use-case";
 
 export class UserRoutes implements ExpressRouterInterface {
   constructor(

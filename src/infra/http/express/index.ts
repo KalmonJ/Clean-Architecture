@@ -1,13 +1,13 @@
 import express, { Express } from "express";
-import { CreateProductUseCase } from "../../../application/create-product.use-case";
-import { CreateUserUseCase } from "../../../application/create-user.use-case";
 import * as routes from "../../../application/routes";
-import { UpdateProductUseCase } from "../../../application/update-product.use-case";
-import { UpdateUserUseCase } from "../../../application/update-user.use-case";
+import { CreateProductUseCase } from "../../../application/usecases/create-product.use-case";
+import { CreateUserUseCase } from "../../../application/usecases/create-user.use-case";
+import { UpdateProductUseCase } from "../../../application/usecases/update-product.use-case";
+import { UpdateUserUseCase } from "../../../application/usecases/update-user.use-case";
 import { HashPassword } from "../../../domain/services/hash-password";
 import { IdGenerator } from "../../../domain/services/id-generator";
-import { ProductInMemoryRepository } from "../../product-in-memory-repository";
-import { UserInMemoryRepository } from "../../user-in-memory-repository";
+import { ProductInMemoryRepository } from "../../repositories/memory/product-in-memory-repository";
+import { UserInMemoryRepository } from "../../repositories/memory/user-in-memory-repository";
 
 const app: Express = express();
 
