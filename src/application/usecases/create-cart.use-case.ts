@@ -1,6 +1,6 @@
-import { CartEntity } from "../domain/entities/cart.entity";
-import { IdGeneratorInterface } from "../domain/interfaces/id-generator.interface";
-import { CartRepositoryInterface } from "../domain/repositories/cart.repository";
+import { CartEntity } from "../../domain/entities/cart.entity";
+import { IdGeneratorInterface } from "../../domain/interfaces/id-generator.interface";
+import { CartRepositoryInterface } from "../../domain/repositories/cart.repository";
 import { OutputProduct } from "./create-product.use-case";
 
 export class CreateCartUseCase {

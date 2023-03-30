@@ -6,41 +6,28 @@ import { UpdateProductUseCase } from "../../../application/usecases/update-produ
 import { UpdateUserUseCase } from "../../../application/usecases/update-user.use-case";
 import { HashPassword } from "../../../domain/services/hash-password";
 import { IdGenerator } from "../../../domain/services/id-generator";
+import { UserController } from "../../controllers/user.controller";
 import { ProductInMemoryRepository } from "../../repositories/memory/product-in-memory-repository";
 import { UserInMemoryRepository } from "../../repositories/memory/user-in-memory-repository";
 
 const app: Express = express();
 
-const productRepository = new ProductInMemoryRepository();
-const idGenerate = new IdGenerator();
-const createProductUseCase = new CreateProductUseCase(
-  productRepository,
-  idGenerate
-);
-
-const updateProductUseCase = new UpdateProductUseCase(productRepository);
-
-const userRepository = new UserInMemoryRepository();
+const userRepo = new UserInMemoryRepository();
 const hashService = new HashPassword();
+const idGenerate = new IdGenerator();
 const createUserUseCase = new CreateUserUseCase(
-  userRepository,
+  userRepo,
   hashService,
   idGenerate
 );
+const updateUserUseCase = new UpdateUserUseCase(userRepo);
 
-const updateUserUseCase = new UpdateUserUseCase(userRepository);
+const container = {
+  userController: new UserController(createUserUseCase, updateUserUseCase),
+};
 
-const productRoutes = new routes.ProductRoutes(
-  createProductUseCase,
-  updateProductUseCase
-);
-const userRoutes = new routes.UserRoutes(createUserUseCase, updateUserUseCase);
-
-app.use(
-  express.json(),
-  productRoutes.registerRoutes(),
-  userRoutes.registerRoutes()
-);
+const userRoutes = new routes.UserRoutes(container.userController);
+app.use(express.json(), userRoutes.registerRoutes());
 
 app.listen(3030, () => {
   console.log("server is running!");

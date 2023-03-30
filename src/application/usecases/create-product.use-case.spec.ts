@@ -14,7 +14,6 @@ describe("Crate product use case", () => {
     const idGenerate = new IdGenerator();
     const useCase = new CreateProductUseCase(repository, idGenerate);
     const product = await useCase.execute(newProduct);
-    ("");
 
     expect(repository.products).toHaveLength(1);
     expect(repository.products[0].props).toStrictEqual(product);
