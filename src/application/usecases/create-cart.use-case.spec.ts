@@ -12,6 +12,8 @@ describe("Create cart use case test", () => {
         id: idGenerete.generate(),
         description: "description",
         price: 2000,
+        creationDate: new Date(),
+        isNewProduct: true,
       },
     ];
 

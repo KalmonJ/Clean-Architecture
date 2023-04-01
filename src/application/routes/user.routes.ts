@@ -1,5 +1,5 @@
 import express, { Router } from "express";
-import { ExpressRouterInterface } from "../../domain/interfaces/express-router.interface";
+import { ExpressRouterInterface } from "./express-router.interface";
 import { UserController } from "../../infra/controllers/user.controller";
 
 export class UserRoutes implements ExpressRouterInterface {

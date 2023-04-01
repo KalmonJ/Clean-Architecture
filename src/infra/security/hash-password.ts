@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import { HashPasswordInterface } from "../interfaces/hash-password.interface";
+import { HashPasswordInterface } from "./hash-password.interface";
 
 export class HashPassword implements HashPasswordInterface {
   salt: number;

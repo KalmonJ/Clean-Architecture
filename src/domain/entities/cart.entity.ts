@@ -1,6 +1,7 @@
 import { OutputProduct } from "../../application/usecases/create-product.use-case";
 import { CartSizeError } from "../errors/cart-size.error";
 import { NegativePriceError } from "../errors/negative-price.error";
+import { QuantityError } from "../errors/quantity.error";
 
 export type CartEntityProps = {
   items: OutputProduct[];
@@ -32,8 +33,8 @@ export class CartEntity {
 
   checkQuantity() {
     if (this.props.quantity !== this.props.items.length) {
-      throw new Error(
-        "O valor da quantidade deve ser igual a quantidade de items no carrinho" //TODO: criar uma classe pra definir este erro
+      throw new QuantityError(
+        "O valor da quantidade deve ser igual a quantidade de items no carrinho"
       );
     }
   }

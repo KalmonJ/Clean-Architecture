@@ -1,5 +1,5 @@
-import { Auth } from "../../domain/services/auth";
-import { HashPassword } from "../../domain/services/hash-password";
+import { Auth } from "../../infra/security/auth";
+import { HashPassword } from "../../infra/security/hash-password";
 import { IdGenerator } from "../../domain/services/id-generator";
 import { UserInMemoryRepository } from "../../infra/repositories/memory/user-in-memory-repository";
 import { CreateUserUseCase } from "./create-user.use-case";

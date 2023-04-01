@@ -1,5 +1,5 @@
 import express, { Request, Router, Response } from "express";
-import { ExpressRouterInterface } from "../../domain/interfaces/express-router.interface";
+import { ExpressRouterInterface } from "./express-router.interface";
 import { CreateProductUseCase } from "../usecases/create-product.use-case";
 import { UpdateProductUseCase } from "../usecases/update-product.use-case";
 
@@ -11,14 +11,7 @@ export class ProductRoutes implements ExpressRouterInterface {
 
   registerRoutes(): Router {
     const router = express.Router();
-    router.post("/product", async (req: Request, res: Response) => {
-      try {
-        const product = await this.createProduct.execute(req.body);
-        return res.status(201).json(product);
-      } catch (error) {
-        return res.status(400).json(error);
-      }
-    });
+    router.post("/product");
 
     router.put("/product/:id", async (req: Request, res: Response) => {
       try {

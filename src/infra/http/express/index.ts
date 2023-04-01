@@ -4,7 +4,7 @@ import { CreateProductUseCase } from "../../../application/usecases/create-produ
 import { CreateUserUseCase } from "../../../application/usecases/create-user.use-case";
 import { UpdateProductUseCase } from "../../../application/usecases/update-product.use-case";
 import { UpdateUserUseCase } from "../../../application/usecases/update-user.use-case";
-import { HashPassword } from "../../../domain/services/hash-password";
+import { HashPassword } from "../../security/hash-password";
 import { IdGenerator } from "../../../domain/services/id-generator";
 import { UserController } from "../../controllers/user.controller";
 import { ProductInMemoryRepository } from "../../repositories/memory/product-in-memory-repository";

@@ -1,6 +1,6 @@
 import { CreateUserUseCase } from "../../application/usecases/create-user.use-case";
-import { Request, Response } from "express";
 import { UpdateUserUseCase } from "../../application/usecases/update-user.use-case";
+import { Request, Response } from "express";
 
 export class UserController {
   constructor(

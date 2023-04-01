@@ -62,4 +62,5 @@ export type ProductEntityProps = {
   name: string;
   description: string;
   image?: string;
+  creationDate: Date;
 };

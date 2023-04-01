@@ -7,6 +7,7 @@ describe("Product entity test", () => {
       name: "any",
       description: "description",
       price: 3000,
+      creationDate: new Date(),
     };
     const product = new ProductEntity(props);
     expect(product.props).toStrictEqual(props);
@@ -18,6 +19,7 @@ describe("Product entity test", () => {
       name: "any",
       description: "description",
       price: 3000,
+      creationDate: new Date(),
     };
     const product = new ProductEntity(props);
     product.update({ name: "Shoes" });

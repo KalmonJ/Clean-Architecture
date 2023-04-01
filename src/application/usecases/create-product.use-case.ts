@@ -1,7 +1,7 @@
-import { ProductEntity } from "../domain/entities/product.entity";
-import { OutputError } from "../domain/interfaces/error.interface";
-import { IdGeneratorInterface } from "../domain/interfaces/id-generator.interface";
-import { ProductRepository } from "../domain/repositories/product.repository";
+import { ProductEntity } from "../../domain/entities/product.entity";
+import { OutputError } from "../../domain/interfaces/error.interface";
+import { IdGeneratorInterface } from "../../domain/interfaces/id-generator.interface";
+import { ProductRepository } from "../../domain/repositories/product.repository";
 
 export class CreateProductUseCase {
   constructor(
@@ -28,11 +28,14 @@ export type InputProduct = {
   image?: string;
   description: string;
   price: number;
+  creationDate: Date;
 };
 
 export type OutputProduct = {
   id: string;
   name: string;
-  price: number;
+  image?: string;
   description: string;
+  price: number;
+  creationDate: Date;
 };
