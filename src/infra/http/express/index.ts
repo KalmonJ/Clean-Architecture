@@ -9,6 +9,9 @@ import { IdGenerator } from "../../../domain/services/id-generator";
 import { UserController } from "../../controllers/user.controller";
 import { ProductInMemoryRepository } from "../../repositories/memory/product-in-memory-repository";
 import { UserInMemoryRepository } from "../../repositories/memory/user-in-memory-repository";
+import { ProductController } from "../../controllers/product.controller";
+import { GetAllProductsByCategoryUseCase } from "../../../application/usecases/get-all-products-by-category.use-case";
+import { GetAllProductsOfTheWeekUseCase } from "../../../application/usecases/get-all-products-of-the-week.use-case";
 
 const app: Express = express();
 
@@ -22,12 +25,31 @@ const createUserUseCase = new CreateUserUseCase(
 );
 const updateUserUseCase = new UpdateUserUseCase(userRepo);
 
+const productRepo = new ProductInMemoryRepository();
+const createProductUseCase = new CreateProductUseCase(productRepo, idGenerate);
+const updateProductUseCase = new UpdateProductUseCase(productRepo);
+const getAllProductsByCategory = new GetAllProductsByCategoryUseCase(
+  productRepo
+);
+const getAllProductsOfTheWeek = new GetAllProductsOfTheWeekUseCase(productRepo);
+
 const container = {
   userController: new UserController(createUserUseCase, updateUserUseCase),
+  productController: new ProductController(
+    createProductUseCase,
+    updateProductUseCase,
+    getAllProductsByCategory,
+    getAllProductsOfTheWeek
+  ),
 };
 
 const userRoutes = new routes.UserRoutes(container.userController);
-app.use(express.json(), userRoutes.registerRoutes());
+const productRoutes = new routes.ProductRoutes(container.productController);
+app.use(
+  express.json(),
+  userRoutes.registerRoutes(),
+  productRoutes.registerRoutes()
+);
 
 app.listen(3030, () => {
   console.log("server is running!");

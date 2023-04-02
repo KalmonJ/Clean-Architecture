@@ -1,27 +1,22 @@
-import express, { Request, Router, Response } from "express";
+import express, { Router } from "express";
 import { ExpressRouterInterface } from "./express-router.interface";
-import { CreateProductUseCase } from "../usecases/create-product.use-case";
-import { UpdateProductUseCase } from "../usecases/update-product.use-case";
+import { ProductController } from "../../infra/controllers/product.controller";
 
 export class ProductRoutes implements ExpressRouterInterface {
-  constructor(
-    private createProduct: CreateProductUseCase,
-    private updateProduct: UpdateProductUseCase
-  ) {}
+  constructor(private productController: ProductController) {}
 
   registerRoutes(): Router {
     const router = express.Router();
-    router.post("/product");
-
-    router.put("/product/:id", async (req: Request, res: Response) => {
-      try {
-        const updated = this.updateProduct.execute(req.params.id, req.body);
-        return res.status(201).json(updated);
-      } catch (error) {
-        return res.status(400).json(error);
-      }
-    });
-
+    router.post("/products", this.productController.createProduct);
+    router.put("/products/:id", this.productController.updateProduct);
+    router.get(
+      "/products/:category",
+      this.productController.getAllProductsByCategory
+    );
+    router.get(
+      "/products/products-of-the-week",
+      this.productController.getAllProductsOfTheWeek
+    );
     return router;
   }
 }

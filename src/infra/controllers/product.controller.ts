@@ -4,7 +4,7 @@ import { GetAllProductsOfTheWeekUseCase } from "../../application/usecases/get-a
 import { UpdateProductUseCase } from "../../application/usecases/update-product.use-case";
 import { Request, Response } from "express";
 
-export class UserController {
+export class ProductController {
   constructor(
     private createProductUseCase: CreateProductUseCase,
     private updateProductUseCase: UpdateProductUseCase,
