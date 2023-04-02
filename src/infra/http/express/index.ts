@@ -15,34 +15,23 @@ import { GetAllProductsOfTheWeekUseCase } from "../../../application/usecases/ge
 
 const app: Express = express();
 
+const productRepo = new ProductInMemoryRepository();
 const userRepo = new UserInMemoryRepository();
 const hashService = new HashPassword();
 const idGenerate = new IdGenerator();
-const createUserUseCase = new CreateUserUseCase(
-  userRepo,
-  hashService,
-  idGenerate
-);
-const updateUserUseCase = new UpdateUserUseCase(userRepo);
-
-const productRepo = new ProductInMemoryRepository();
-const createProductUseCase = new CreateProductUseCase(productRepo, idGenerate);
-const updateProductUseCase = new UpdateProductUseCase(productRepo);
-const getAllProductsByCategory = new GetAllProductsByCategoryUseCase(
-  productRepo
-);
-const getAllProductsOfTheWeek = new GetAllProductsOfTheWeekUseCase(productRepo);
 
 const container = {
-  userController: new UserController(createUserUseCase, updateUserUseCase),
+  userController: new UserController(
+    new CreateUserUseCase(userRepo, hashService, idGenerate),
+    new UpdateUserUseCase(userRepo)
+  ),
   productController: new ProductController(
-    createProductUseCase,
-    updateProductUseCase,
-    getAllProductsByCategory,
-    getAllProductsOfTheWeek
+    new CreateProductUseCase(productRepo, idGenerate),
+    new UpdateProductUseCase(productRepo),
+    new GetAllProductsByCategoryUseCase(productRepo),
+    new GetAllProductsOfTheWeekUseCase(productRepo)
   ),
 };
-
 const userRoutes = new routes.UserRoutes(container.userController);
 const productRoutes = new routes.ProductRoutes(container.productController);
 app.use(

@@ -10,16 +10,21 @@ export class ProductController {
     private updateProductUseCase: UpdateProductUseCase,
     private getAllProductsByCategoryUseCase: GetAllProductsByCategoryUseCase,
     private getAllProductsOfTheWeekUseCase: GetAllProductsOfTheWeekUseCase
-  ) {}
+  ) {
+    this.createProduct = this.createProduct.bind(this);
+    this.getAllProductsByCategory = this.getAllProductsByCategory.bind(this);
+    this.getAllProductsOfTheWeek = this.getAllProductsOfTheWeek.bind(this);
+    this.updateProduct = this.getAllProductsOfTheWeek.bind(this);
+  }
 
   async createProduct(req: Request, res: Response) {
     try {
-      const Product = await this.createProductUseCase.execute(req.body);
+      const product = await this.createProductUseCase.execute(req.body);
 
-      if ("error" in Product) {
-        throw new Error(Product.error);
+      if ("error" in product) {
+        throw new Error(product.error);
       }
-      return res.status(201).json(Product);
+      return res.status(201).json(product);
     } catch (error: any) {
       return res.status(400).json({ message: error.message });
     }
