@@ -10,6 +10,7 @@ describe("Crate product use case", () => {
       price: 123123,
       image: "",
       creationDate: new Date(),
+      category: "SPEAKERS",
     };
     const repository = new ProductInMemoryRepository();
     const idGenerate = new IdGenerator();
@@ -27,6 +28,7 @@ describe("Crate product use case", () => {
       price: -123123,
       image: "",
       creationDate: new Date(),
+      category: "HEADPHONES",
     };
     const repository = new ProductInMemoryRepository();
     const idGenerate = new IdGenerator();
@@ -46,6 +48,7 @@ describe("Crate product use case", () => {
       price: 123123,
       image: "",
       creationDate: new Date(),
+      category: "EARPHONES",
     };
     const repository = new ProductInMemoryRepository();
     const idGenerate = new IdGenerator();

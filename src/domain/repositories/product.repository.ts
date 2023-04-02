@@ -1,4 +1,3 @@
-import { OutputProduct } from "../../application/usecases/create-product.use-case";
 import { ProductEntity } from "../entities/product.entity";
 
 export interface ProductRepository {
@@ -6,4 +5,5 @@ export interface ProductRepository {
   findById(id: string): Promise<ProductEntity>;
   update(id: string, input: ProductEntity): Promise<boolean>;
   getAll(): Promise<ProductEntity[]>;
+  findByCategory(category: string): Promise<ProductEntity[]>;
 }

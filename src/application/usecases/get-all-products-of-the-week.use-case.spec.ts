@@ -10,12 +10,14 @@ describe("GetAllProductsOfTheWeek use case test", () => {
       description: "anyDescription",
       creationDate: new Date("2021-03-25"),
       price: 2000,
+      category: "EARPHONES",
     };
     const newProduct: InputProduct = {
       name: "anyProduct",
       description: "anyDescription",
       creationDate: new Date(),
       price: 2000,
+      category: "HEADPHONES",
     };
     const productRepo = new ProductInMemoryRepository();
     const identifier = new IdGenerator();

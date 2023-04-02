@@ -16,6 +16,12 @@ export class ProductInMemoryRepository implements ProductRepository {
     }
     return false;
   }
+  async findByCategory(category: string): Promise<ProductEntity[]> {
+    const products = this.products.filter(
+      (product) => product.props.category === category
+    );
+    return products;
+  }
   async insert(product: ProductEntity): Promise<void> {
     this.products.push(product);
   }

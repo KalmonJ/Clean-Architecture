@@ -29,6 +29,7 @@ export type InputProduct = {
   description: string;
   price: number;
   creationDate: Date;
+  category: "HEADPHONES" | "SPEAKERS" | "EARPHONES";
 };
 
 export type OutputProduct = {
@@ -38,4 +39,5 @@ export type OutputProduct = {
   description: string;
   price: number;
   creationDate: Date;
+  category: "HEADPHONES" | "SPEAKERS" | "EARPHONES";
 };

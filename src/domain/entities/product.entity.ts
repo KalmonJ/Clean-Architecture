@@ -56,6 +56,8 @@ export class ProductEntity {
   }
 }
 
+export type Category = "HEADPHONES" | "SPEAKERS" | "EARPHONES";
+
 export type ProductEntityProps = {
   id: string;
   price: number;
@@ -63,4 +65,5 @@ export type ProductEntityProps = {
   description: string;
   image?: string;
   creationDate: Date;
+  category: Category;
 };
