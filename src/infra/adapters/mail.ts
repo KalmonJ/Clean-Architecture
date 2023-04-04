@@ -8,7 +8,7 @@ export class Mail implements MailInterface {
         service: "gmail",
         auth: {
           user: "kalmonkk69@gmail.com",
-          pass: "xpifabejnuwlrcyo",
+          pass: process.env.password,
         },
       });
       transporter.sendMail(input);
