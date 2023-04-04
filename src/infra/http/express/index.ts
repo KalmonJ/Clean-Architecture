@@ -12,6 +12,8 @@ import { UserInMemoryRepository } from "../../repositories/memory/user-in-memory
 import { ProductController } from "../../controllers/product.controller";
 import { GetAllProductsByCategoryUseCase } from "../../../application/usecases/get-all-products-by-category.use-case";
 import { GetAllProductsOfTheWeekUseCase } from "../../../application/usecases/get-all-products-of-the-week.use-case";
+import { SendEmailRegisterUseCase } from "./../../../application/usecases/send-email-register.use-case";
+import { Mail } from "../../adapters/mail";
 
 const app: Express = express();
 
@@ -19,11 +21,13 @@ const productRepo = new ProductInMemoryRepository();
 const userRepo = new UserInMemoryRepository();
 const hashService = new HashPassword();
 const idGenerate = new IdGenerator();
+const sendMail = new Mail();
 
 const container = {
   userController: new UserController(
     new CreateUserUseCase(userRepo, hashService, idGenerate),
-    new UpdateUserUseCase(userRepo)
+    new UpdateUserUseCase(userRepo),
+    new SendEmailRegisterUseCase(sendMail)
   ),
   productController: new ProductController(
     new CreateProductUseCase(productRepo, idGenerate),
