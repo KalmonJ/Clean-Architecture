@@ -1,2 +1,2 @@
-export { UserRoutes } from "./user.routes";
-export { ProductRoutes } from "./product.routes";
+export { UserRoutes } from "./users.routes";
+export { ProductRoutes } from "./products.routes";

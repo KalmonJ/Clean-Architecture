@@ -2,7 +2,71 @@ import { ProductEntity } from "../../../domain/entities/product.entity";
 import { ProductRepository } from "../../../domain/repositories/product.repository";
 
 export class ProductInMemoryRepository implements ProductRepository {
-  products: ProductEntity[] = [];
+  products: ProductEntity[] = [
+    new ProductEntity({
+      id: "dfsdfsdf",
+      name: "anyProduct",
+      description: "anyDescription",
+      creationDate: new Date(),
+      category: "HEADPHONES",
+      price: 33343,
+      image: undefined,
+    }),
+    new ProductEntity({
+      id: "dfsdfsdf",
+      name: "anyProduct",
+      description: "anyDescription",
+      creationDate: new Date("2023-03-01"),
+      category: "HEADPHONES",
+      price: 33343,
+      image: undefined,
+    }),
+    new ProductEntity({
+      id: "dfsdfsdf",
+      name: "anyProduct",
+      description: "anyDescription",
+      creationDate: new Date(),
+      category: "HEADPHONES",
+      price: 33343,
+      image: undefined,
+    }),
+    new ProductEntity({
+      id: "dfsdfsdf",
+      name: "anyProduct",
+      description: "anyDescription",
+      creationDate: new Date("2023-03-01"),
+      category: "HEADPHONES",
+      price: 33343,
+      image: undefined,
+    }),
+    new ProductEntity({
+      id: "dfsdfsdf",
+      name: "anyProduct",
+      description: "anyDescription",
+      creationDate: new Date(),
+      category: "HEADPHONES",
+      price: 33343,
+      image: undefined,
+    }),
+    new ProductEntity({
+      id: "dfsdfsdf",
+      name: "anyProduct",
+      description: "anyDescription",
+      creationDate: new Date(),
+      category: "HEADPHONES",
+      price: 33343,
+      image: undefined,
+    }),
+    new ProductEntity({
+      id: "dfsdfsdf",
+      name: "anyProduct",
+      description: "anyDescription",
+      creationDate: new Date(),
+      category: "HEADPHONES",
+      price: 33343,
+      image: undefined,
+    }),
+  ];
   async findById(id: string): Promise<ProductEntity> {
     const product = this.products.find((products) => products.props.id === id);
     if (!product) throw new Error("Product not found");

@@ -34,6 +34,7 @@ const container = {
 };
 const userRoutes = new routes.UserRoutes(container.userController);
 const productRoutes = new routes.ProductRoutes(container.productController);
+
 app.use(
   express.json(),
   userRoutes.registerRoutes(),

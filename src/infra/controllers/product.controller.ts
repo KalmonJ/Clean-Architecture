@@ -43,11 +43,10 @@ export class ProductController {
     }
   }
 
-  async getAllProductsOfTheWeek(_: Request, res: Response) {
+  async getAllProductsOfTheWeek(req: Request, res: Response) {
     try {
       const productsOfTheWeek =
         await this.getAllProductsOfTheWeekUseCase.execute();
-
       return res.status(200).json(productsOfTheWeek);
     } catch (error: any) {
       return res.status(400).json({ message: error.message });
