@@ -7,7 +7,7 @@ export class Mail implements MailInterface {
       const transporter = nm.createTransport({
         service: "gmail",
         auth: {
-          user: "kalmonkk69@gmail.com",
+          user: process.env.email,
           pass: process.env.password,
         },
       });
