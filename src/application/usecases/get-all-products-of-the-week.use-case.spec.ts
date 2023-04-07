@@ -1,5 +1,6 @@
 import { IdGenerator } from "../../domain/services/id-generator";
 import { ProductInMemoryRepository } from "../../infra/repositories/memory/product-in-memory-repository";
+import { WeekProductsStrategy } from "../../infra/strategies/week-products.strategy";
 import { CreateProductUseCase, InputProduct } from "./create-product.use-case";
 import { GetAllProductsOfTheWeekUseCase } from "./get-all-products-of-the-week.use-case";
 
@@ -21,6 +22,7 @@ describe("GetAllProductsOfTheWeek use case test", () => {
     };
     const productRepo = new ProductInMemoryRepository();
     const identifier = new IdGenerator();
+    const productStrategy = new WeekProductsStrategy();
     const createProductUseCase = new CreateProductUseCase(
       productRepo,
       identifier
@@ -29,7 +31,10 @@ describe("GetAllProductsOfTheWeek use case test", () => {
     await createProductUseCase.execute(oldProduct);
     await createProductUseCase.execute(newProduct);
 
-    const allProductsUseCase = new GetAllProductsOfTheWeekUseCase(productRepo);
+    const allProductsUseCase = new GetAllProductsOfTheWeekUseCase(
+      productRepo,
+      productStrategy
+    );
 
     const allWeekProducts = await allProductsUseCase.execute();
 

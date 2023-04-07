@@ -14,7 +14,8 @@ describe("Create cart use case test", () => {
         price: 2000,
         creationDate: new Date(),
         isNewProduct: true,
-      },
+        category: "HEADPHONES",
+      } as const,
     ];
 
     const cart: InputCart = {

@@ -14,6 +14,7 @@ import { GetAllProductsByCategoryUseCase } from "../../../application/usecases/g
 import { GetAllProductsOfTheWeekUseCase } from "../../../application/usecases/get-all-products-of-the-week.use-case";
 import { SendEmailRegisterUseCase } from "./../../../application/usecases/send-email-register.use-case";
 import { Mail } from "../../adapters/mail";
+import { WeekProductsStrategy } from "../../strategies/week-products.strategy";
 
 const app: Express = express();
 
@@ -22,6 +23,7 @@ const userRepo = new UserInMemoryRepository();
 const hashService = new HashPassword();
 const idGenerate = new IdGenerator();
 const sendMail = new Mail();
+const productStrategy = new WeekProductsStrategy();
 
 const container = {
   userController: new UserController(
@@ -32,8 +34,8 @@ const container = {
   productController: new ProductController(
     new CreateProductUseCase(productRepo, idGenerate),
     new UpdateProductUseCase(productRepo),
-    new GetAllProductsByCategoryUseCase(productRepo),
-    new GetAllProductsOfTheWeekUseCase(productRepo)
+    new GetAllProductsByCategoryUseCase(productRepo, productStrategy),
+    new GetAllProductsOfTheWeekUseCase(productRepo, productStrategy)
   ),
 };
 const userRoutes = new routes.UserRoutes(container.userController);

@@ -3,6 +3,7 @@ import { GetAllProductsByCategoryUseCase } from "../../application/usecases/get-
 import { GetAllProductsOfTheWeekUseCase } from "../../application/usecases/get-all-products-of-the-week.use-case";
 import { UpdateProductUseCase } from "../../application/usecases/update-product.use-case";
 import { Request, Response } from "express";
+import { Category } from "../../domain/entities/product.entity";
 
 export class ProductController {
   constructor(
@@ -34,7 +35,7 @@ export class ProductController {
     try {
       const allProductsByCategory =
         await this.getAllProductsByCategoryUseCase.execute({
-          category: req.body,
+          category: req.params.category as Category,
         });
 
       return res.status(200).json(allProductsByCategory);

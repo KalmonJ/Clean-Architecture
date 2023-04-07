@@ -1,15 +1,31 @@
 import { ProductRepository } from "../../domain/repositories/product.repository";
+import { WeekProductsStrategyInterface } from "../../infra/strategies/week-products.strategy.interface";
 import { OutputProduct } from "./create-product.use-case";
 
 export class GetAllProductsByCategoryUseCase {
-  constructor(private productRepo: ProductRepository) {}
+  constructor(
+    private productRepo: ProductRepository,
+    private productStrategy: WeekProductsStrategyInterface
+  ) {}
 
   async execute(
     input: InputGetAllProductsByCategory
-  ): Promise<OutputProduct[]> {
+  ): Promise<OutputByCategory[]> {
     const response = await this.productRepo.findByCategory(input.category);
-    return response.map((el) => el.toJSON());
+    return await Promise.all(
+      response.map(async (el) => ({
+        ...el.toJSON(),
+        isNewProduct: await this.productStrategy.compareWith(
+          7,
+          el.props.creationDate
+        ),
+      }))
+    );
   }
+}
+
+export interface OutputByCategory extends OutputProduct {
+  isNewProduct: boolean;
 }
 
 export type InputGetAllProductsByCategory = {

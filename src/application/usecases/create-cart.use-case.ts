@@ -18,13 +18,9 @@ export class CreateCartUseCase {
 
 export type InputCart = {
   items: OutputProduct[];
-  totalValue: number;
-  quantity: number;
 };
 
 export type OutputCart = {
   items: OutputProduct[];
   id: string;
-  quantity: number;
-  totalValue: number;
 };
