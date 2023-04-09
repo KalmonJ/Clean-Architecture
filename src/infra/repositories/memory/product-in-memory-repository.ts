@@ -5,40 +5,7 @@ import {
 import { ProductRepository } from "../../../domain/repositories/product.repository";
 
 export class ProductInMemoryRepository implements ProductRepository {
-  products: ProductEntity[] = [
-    new ProductEntity({
-      category: "EARPHONES",
-      creationDate: new Date(),
-      description: "description",
-      name: "name",
-      price: 3423,
-      id: "dfsdf",
-    }),
-    new ProductEntity({
-      category: "HEADPHONES",
-      creationDate: new Date(),
-      description: "description",
-      name: "name",
-      price: 3423,
-      id: "dfsdf",
-    }),
-    new ProductEntity({
-      category: "EARPHONES",
-      creationDate: new Date(),
-      description: "description",
-      name: "name",
-      price: 3423,
-      id: "dfsdf",
-    }),
-    new ProductEntity({
-      category: "SPEAKERS",
-      creationDate: new Date(),
-      description: "description",
-      name: "name",
-      price: 3423,
-      id: "dfsdf",
-    }),
-  ];
+  products: ProductEntity[] = [];
   getCategories(): Promise<Category[]> {
     throw new Error("Method not implemented.");
   }
