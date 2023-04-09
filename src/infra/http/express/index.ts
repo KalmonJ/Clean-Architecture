@@ -15,10 +15,14 @@ import { GetAllProductsOfTheWeekUseCase } from "../../../application/usecases/ge
 import { SendEmailRegisterUseCase } from "./../../../application/usecases/send-email-register.use-case";
 import { Mail } from "../../adapters/mail";
 import { WeekProductsStrategy } from "../../strategies/week-products.strategy";
+import { ProductDataBaseRepository } from "../../repositories/database/product-database-repository";
+import { Connection } from "../../repositories/database/connection";
 
 const app: Express = express();
 
-const productRepo = new ProductInMemoryRepository();
+new Connection().connect();
+
+const productRepo = new ProductDataBaseRepository();
 const userRepo = new UserInMemoryRepository();
 const hashService = new HashPassword();
 const idGenerate = new IdGenerator();

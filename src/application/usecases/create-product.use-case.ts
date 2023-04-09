@@ -29,7 +29,14 @@ export type InputProduct = {
   description: string;
   price: number;
   creationDate: Date;
+  features: string;
+  inTheBox: InTheBox[];
   category: "HEADPHONES" | "SPEAKERS" | "EARPHONES";
+};
+
+export type InTheBox = {
+  name: string;
+  quantity: 1;
 };
 
 export type OutputProduct = {

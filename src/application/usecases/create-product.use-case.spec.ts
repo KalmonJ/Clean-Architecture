@@ -11,6 +11,8 @@ describe("Crate product use case", () => {
       image: "",
       creationDate: new Date(),
       category: "SPEAKERS",
+      features: "any features",
+      inTheBox: [{ name: "any", quantity: 1 }],
     };
     const repository = new ProductInMemoryRepository();
     const idGenerate = new IdGenerator();
@@ -29,6 +31,8 @@ describe("Crate product use case", () => {
       image: "",
       creationDate: new Date(),
       category: "HEADPHONES",
+      features: "any features",
+      inTheBox: [{ name: "any", quantity: 1 }],
     };
     const repository = new ProductInMemoryRepository();
     const idGenerate = new IdGenerator();
@@ -49,6 +53,8 @@ describe("Crate product use case", () => {
       image: "",
       creationDate: new Date(),
       category: "EARPHONES",
+      features: "any features",
+      inTheBox: [{ name: "any", quantity: 1 }],
     };
     const repository = new ProductInMemoryRepository();
     const idGenerate = new IdGenerator();

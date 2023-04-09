@@ -20,8 +20,6 @@ describe("Create cart use case test", () => {
 
     const cart: InputCart = {
       items,
-      totalValue: 222,
-      quantity: items.length,
     };
 
     const cartRepository = new CartInMemoryRepository();

@@ -1,8 +1,47 @@
-import { ProductEntity } from "../../../domain/entities/product.entity";
+import {
+  Category,
+  ProductEntity,
+} from "../../../domain/entities/product.entity";
 import { ProductRepository } from "../../../domain/repositories/product.repository";
 
 export class ProductInMemoryRepository implements ProductRepository {
-  products: ProductEntity[] = [];
+  products: ProductEntity[] = [
+    new ProductEntity({
+      category: "EARPHONES",
+      creationDate: new Date(),
+      description: "description",
+      name: "name",
+      price: 3423,
+      id: "dfsdf",
+    }),
+    new ProductEntity({
+      category: "HEADPHONES",
+      creationDate: new Date(),
+      description: "description",
+      name: "name",
+      price: 3423,
+      id: "dfsdf",
+    }),
+    new ProductEntity({
+      category: "EARPHONES",
+      creationDate: new Date(),
+      description: "description",
+      name: "name",
+      price: 3423,
+      id: "dfsdf",
+    }),
+    new ProductEntity({
+      category: "SPEAKERS",
+      creationDate: new Date(),
+      description: "description",
+      name: "name",
+      price: 3423,
+      id: "dfsdf",
+    }),
+  ];
+  getCategories(): Promise<Category[]> {
+    throw new Error("Method not implemented.");
+  }
   async findById(id: string): Promise<ProductEntity> {
     const product = this.products.find((products) => products.props.id === id);
     if (!product) throw new Error("Product not found");

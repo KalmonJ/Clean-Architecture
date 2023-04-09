@@ -1,4 +1,4 @@
-import { ProductEntity } from "../entities/product.entity";
+import { Category, ProductEntity } from "../entities/product.entity";
 
 export interface ProductRepository {
   insert(product: ProductEntity): Promise<void>;
@@ -6,4 +6,5 @@ export interface ProductRepository {
   update(id: string, input: ProductEntity): Promise<boolean>;
   getAll(): Promise<ProductEntity[]>;
   findByCategory(category: string): Promise<ProductEntity[]>;
+  getCategories(): Promise<Category[]>;
 }
