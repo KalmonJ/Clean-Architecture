@@ -4,6 +4,8 @@ import { GetAllProductsOfTheWeekUseCase } from "../../application/usecases/get-a
 import { UpdateProductUseCase } from "../../application/usecases/update-product.use-case";
 import { Request, Response } from "express";
 import { Category } from "../../domain/entities/product.entity";
+import { ProductRepository } from "../../domain/repositories/product.repository";
+import { ProductDataBaseRepository } from "../repositories/database/product-database-repository";
 
 export class ProductController {
   constructor(
@@ -22,9 +24,6 @@ export class ProductController {
     try {
       const product = await this.createProductUseCase.execute(req.body);
 
-      if ("error" in product) {
-        throw new Error(product.error);
-      }
       return res.status(201).json(product);
     } catch (error: any) {
       return res.status(400).json({ message: error.message });
@@ -39,6 +38,18 @@ export class ProductController {
         });
 
       return res.status(200).json(allProductsByCategory);
+    } catch (error: any) {
+      return res.status(400).json({ message: error.message });
+    }
+  }
+
+  async getProductById(req: Request, res: Response) {
+    try {
+      const productRepo = new ProductDataBaseRepository();
+      const product = await productRepo.findById(req.params.id);
+
+      console.log(product, "produtooo");
+      return res.status(200).json(product);
     } catch (error: any) {
       return res.status(400).json({ message: error.message });
     }

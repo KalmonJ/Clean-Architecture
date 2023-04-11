@@ -7,6 +7,7 @@ const Schema = new mongoose.Schema({
   creationDate: { type: Date, required: true },
   category: { type: String, required: true },
   features: { type: String, required: true },
+  images: { thumbnail: { type: String }, presentation: [] },
   inTheBox: [
     {
       name: { type: String, required: true },

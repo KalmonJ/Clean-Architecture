@@ -1,5 +1,4 @@
 import { ProductEntity } from "../../domain/entities/product.entity";
-import { OutputError } from "../../domain/interfaces/error.interface";
 import { IdGeneratorInterface } from "../../domain/interfaces/id-generator.interface";
 import { ProductRepository } from "../../domain/repositories/product.repository";
 
@@ -9,23 +8,25 @@ export class CreateProductUseCase {
     private idGenerate: IdGeneratorInterface
   ) {}
 
-  async execute(input: InputProduct): Promise<OutputProduct | OutputError> {
+  async execute(input: InputProduct): Promise<void> {
     try {
       const product = new ProductEntity({
         ...input,
         id: this.idGenerate.generate(),
       });
       await this.productRepo.insert(product);
-      return product.toJSON();
     } catch (error: any) {
-      return { error: error.message };
+      console.log(error);
     }
   }
 }
 
 export type InputProduct = {
   name: string;
-  image?: string;
+  images?: {
+    thumbnail: string;
+    presentation: string[];
+  };
   description: string;
   price: number;
   creationDate: Date;

@@ -11,6 +11,8 @@ describe("Update product use case test", () => {
       price: 1000,
       category: "EARPHONES",
       creationDate: new Date(),
+      features: "",
+      inTheBox: [],
     };
     const repository = new ProductInMemoryRepository();
     const idGenerate = new IdGenerator();
