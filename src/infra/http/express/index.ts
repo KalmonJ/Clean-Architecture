@@ -17,6 +17,7 @@ import { Mail } from "../../adapters/mail";
 import { WeekProductsStrategy } from "../../strategies/week-products.strategy";
 import { ProductDataBaseRepository } from "../../repositories/database/product-database-repository";
 import { Connection } from "../../repositories/database/connection";
+import cors from "cors";
 
 const app: Express = express();
 
@@ -47,6 +48,11 @@ const productRoutes = new routes.ProductRoutes(container.productController);
 
 app.use(
   express.json(),
+  cors({
+    origin: "*",
+    methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  }),
   userRoutes.registerRoutes(),
   productRoutes.registerRoutes()
 );
