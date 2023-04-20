@@ -18,6 +18,7 @@ import { WeekProductsStrategy } from "../../strategies/week-products.strategy";
 import { ProductDataBaseRepository } from "../../repositories/database/product-database-repository";
 import { Connection } from "../../repositories/database/connection";
 import cors from "cors";
+import { GetRecommendationsUseCase } from "../../../application/usecases/get-recommendations";
 
 const app: Express = express();
 
@@ -40,7 +41,8 @@ const container = {
     new CreateProductUseCase(productRepo, idGenerate),
     new UpdateProductUseCase(productRepo),
     new GetAllProductsByCategoryUseCase(productRepo, productStrategy),
-    new GetAllProductsOfTheWeekUseCase(productRepo, productStrategy)
+    new GetAllProductsOfTheWeekUseCase(productRepo, productStrategy),
+    new GetRecommendationsUseCase(productRepo)
   ),
 };
 const userRoutes = new routes.UserRoutes(container.userController);

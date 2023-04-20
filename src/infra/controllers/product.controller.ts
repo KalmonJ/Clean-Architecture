@@ -6,18 +6,21 @@ import { Request, Response } from "express";
 import { Category } from "../../domain/entities/product.entity";
 import { ProductRepository } from "../../domain/repositories/product.repository";
 import { ProductDataBaseRepository } from "../repositories/database/product-database-repository";
+import { GetRecommendationsUseCase } from "../../application/usecases/get-recommendations";
 
 export class ProductController {
   constructor(
     private createProductUseCase: CreateProductUseCase,
     private updateProductUseCase: UpdateProductUseCase,
     private getAllProductsByCategoryUseCase: GetAllProductsByCategoryUseCase,
-    private getAllProductsOfTheWeekUseCase: GetAllProductsOfTheWeekUseCase
+    private getAllProductsOfTheWeekUseCase: GetAllProductsOfTheWeekUseCase,
+    private getRecommendationsUseCase: GetRecommendationsUseCase
   ) {
     this.createProduct = this.createProduct.bind(this);
     this.getAllProductsByCategory = this.getAllProductsByCategory.bind(this);
     this.getAllProductsOfTheWeek = this.getAllProductsOfTheWeek.bind(this);
     this.updateProduct = this.getAllProductsOfTheWeek.bind(this);
+    this.getRecommendations = this.getRecommendations.bind(this);
   }
 
   async createProduct(req: Request, res: Response) {
@@ -50,6 +53,21 @@ export class ProductController {
 
       console.log(product, "produtooo");
       return res.status(200).json(product);
+    } catch (error: any) {
+      return res.status(400).json({ message: error.message });
+    }
+  }
+
+  async getRecommendations(req: Request, res: Response) {
+    console.log(req.params);
+    try {
+      const recommendations = await this.getRecommendationsUseCase.execute(
+        req.params.category
+      );
+
+      console.log(recommendations, "recommendationnnnn");
+
+      return res.status(200).json(recommendations);
     } catch (error: any) {
       return res.status(400).json({ message: error.message });
     }

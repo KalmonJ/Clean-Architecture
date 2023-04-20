@@ -15,7 +15,7 @@ export class GetAllProductsByCategoryUseCase {
     return await Promise.all(
       response.map(async (el) => ({
         ...el.toJSON(),
-        isNewProduct: await this.productStrategy.compareWith(
+        isNewProduct: this.productStrategy.compareWith(
           7,
           el.props.creationDate
         ),

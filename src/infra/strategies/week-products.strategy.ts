@@ -20,7 +20,7 @@ export class WeekProductsStrategy implements WeekProductsStrategyInterface {
   async weekProducts(products: ProductEntity[]): Promise<OutputProduct[]> {
     const data = products
       .map((product) => product.toJSON())
-      .filter((el) => this.compareWith(7, el.creationDate));
+      .filter((el) => this.compareWith(7 * 4, el.creationDate));
     return data;
   }
 }

@@ -13,6 +13,10 @@ export class ProductRoutes implements ExpressRouterInterface {
       "/products/:category",
       this.productController.getAllProductsByCategory
     );
+    router.get(
+      "/products/recommendations/:category",
+      this.productController.getRecommendations
+    );
     router.get("/products/product/:id", this.productController.getProductById);
     router.get(
       "/products-of-the-week",
