@@ -1,6 +1,7 @@
 import express, { Router } from "express";
 import { ExpressRouterInterface } from "./express-router.interface";
 import { ProductController } from "../../infra/controllers/product.controller";
+import { AuthMiddleware } from "../../infra/middlewares/authMiddleware";
 
 export class ProductRoutes implements ExpressRouterInterface {
   constructor(private productController: ProductController) {}
@@ -15,6 +16,7 @@ export class ProductRoutes implements ExpressRouterInterface {
     );
     router.get(
       "/products/recommendations/:category",
+      new AuthMiddleware().authenticate,
       this.productController.getRecommendations
     );
     router.get("/products/product/:id", this.productController.getProductById);

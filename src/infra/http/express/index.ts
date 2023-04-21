@@ -17,21 +17,30 @@ import { Mail } from "../../adapters/mail";
 import { WeekProductsStrategy } from "../../strategies/week-products.strategy";
 import { ProductDataBaseRepository } from "../../repositories/database/product-database-repository";
 import { Connection } from "../../repositories/database/connection";
-import cors from "cors";
 import { GetRecommendationsUseCase } from "../../../application/usecases/get-recommendations";
+import { AuthController } from "../../controllers/auth.controller";
+import { LoginUseCase } from "../../../application/usecases/log-in.use-case";
+import { UserDataBaseRepository } from "../../repositories/database/user-database-repository";
+import { Auth } from "../../security/auth";
+import cors from "cors";
 
 const app: Express = express();
 
 new Connection().connect();
 
 const productRepo = new ProductDataBaseRepository();
-const userRepo = new UserInMemoryRepository();
+const productStrategy = new WeekProductsStrategy();
+const userRepo = new UserDataBaseRepository();
 const hashService = new HashPassword();
 const idGenerate = new IdGenerator();
+const auth = new Auth();
 const sendMail = new Mail();
-const productStrategy = new WeekProductsStrategy();
 
 const container = {
+  authController: new AuthController(
+    new LoginUseCase(userRepo, hashService, auth)
+  ),
+
   userController: new UserController(
     new CreateUserUseCase(userRepo, hashService, idGenerate),
     new UpdateUserUseCase(userRepo),
@@ -47,6 +56,7 @@ const container = {
 };
 const userRoutes = new routes.UserRoutes(container.userController);
 const productRoutes = new routes.ProductRoutes(container.productController);
+const authRoutes = new routes.AuthRoutes(container.authController);
 
 app.use(
   express.json(),
@@ -56,9 +66,10 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   }),
   userRoutes.registerRoutes(),
-  productRoutes.registerRoutes()
+  productRoutes.registerRoutes(),
+  authRoutes.registerRoutes()
 );
 
-app.listen(3030, () => {
+app.listen(4040, () => {
   console.log("server is running!");
 });

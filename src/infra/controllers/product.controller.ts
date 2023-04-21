@@ -3,10 +3,9 @@ import { GetAllProductsByCategoryUseCase } from "../../application/usecases/get-
 import { GetAllProductsOfTheWeekUseCase } from "../../application/usecases/get-all-products-of-the-week.use-case";
 import { UpdateProductUseCase } from "../../application/usecases/update-product.use-case";
 import { Request, Response } from "express";
-import { Category } from "../../domain/entities/product.entity";
-import { ProductRepository } from "../../domain/repositories/product.repository";
 import { ProductDataBaseRepository } from "../repositories/database/product-database-repository";
 import { GetRecommendationsUseCase } from "../../application/usecases/get-recommendations";
+import { Category } from "../../domain/entities/product.entity";
 
 export class ProductController {
   constructor(
@@ -59,14 +58,10 @@ export class ProductController {
   }
 
   async getRecommendations(req: Request, res: Response) {
-    console.log(req.params);
     try {
       const recommendations = await this.getRecommendationsUseCase.execute(
         req.params.category
       );
-
-      console.log(recommendations, "recommendationnnnn");
-
       return res.status(200).json(recommendations);
     } catch (error: any) {
       return res.status(400).json({ message: error.message });

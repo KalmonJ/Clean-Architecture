@@ -4,7 +4,7 @@ import { AuthInterface } from "../../infra/security/auth.interface";
 import { HashPasswordInterface } from "../../infra/security/hash-password.interface";
 import { UserRepository } from "../../domain/repositories/user.repository";
 
-export class Login {
+export class LoginUseCase {
   constructor(
     private usersRepo: UserRepository,
     private hashService: HashPasswordInterface,
@@ -13,10 +13,7 @@ export class Login {
   async execute(input: InputLogin): Promise<OutputLogin> {
     const user = await this.usersRepo.findByEmail(input.email);
     if (!user) throw new UserNotFound();
-    const match = await this.hashService.compare(
-      input.password,
-      user.props.password
-    );
+    const match = await this.hashService.compare(input.password, user.password);
     if (!match) throw new InvalidCredentials();
     return { token: await this.auth.createToken(user) };
   }
