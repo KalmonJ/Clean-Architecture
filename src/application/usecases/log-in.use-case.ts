@@ -15,7 +15,15 @@ export class LoginUseCase {
     if (!user) throw new UserNotFound();
     const match = await this.hashService.compare(input.password, user.password);
     if (!match) throw new InvalidCredentials();
-    return { token: await this.auth.createToken(user) };
+    return {
+      token: await this.auth.createToken({
+        username: user.username,
+        email: user.email,
+        image: user.image,
+        phone: user.phone,
+        id: user.id,
+      }),
+    };
   }
 }
 

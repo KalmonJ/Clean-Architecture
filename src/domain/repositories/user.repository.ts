@@ -13,4 +13,5 @@ export interface UserProps {
   email: string;
   phone: string;
   image?: string;
+  id: string;
 }

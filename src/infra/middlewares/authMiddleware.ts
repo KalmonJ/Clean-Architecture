@@ -27,7 +27,7 @@ export class AuthMiddleware implements AuthMiddlewareInterface {
         next();
       });
     } else {
-      res.status(403).json({ sucess: false, message: "Unauthorized" });
+      res.status(401).json({ sucess: false, message: "Unauthorized" });
     }
   }
 }
