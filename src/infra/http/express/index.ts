@@ -1,5 +1,5 @@
 import express, { Express } from "express";
-import * as routes from "../../../application/routes";
+import * as routes from "./routes";
 import { CreateProductUseCase } from "../../../application/usecases/create-product.use-case";
 import { CreateUserUseCase } from "../../../application/usecases/create-user.use-case";
 import { UpdateProductUseCase } from "../../../application/usecases/update-product.use-case";
