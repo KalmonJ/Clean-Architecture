@@ -1,11 +1,12 @@
 import { NextFunction, Request, Response } from "express";
 import { AuthMiddlewareInterface } from "./authMiddleware.interface";
 import { Auth } from "../security/auth";
+import { UserEntityProps } from "../../domain/entities/user.entity";
 
 declare global {
   namespace Express {
     interface Request {
-      user: any;
+      user: UserEntityProps;
     }
   }
 }
