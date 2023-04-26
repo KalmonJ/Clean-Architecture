@@ -6,7 +6,10 @@ export class CartController {
   constructor(
     private createCartUseCase: CreateCartUseCase,
     private getCartUseCase: GetCartUseCase
-  ) {}
+  ) {
+    this.createCart = this.createCart.bind(this);
+    this.getCart = this.getCart.bind(this);
+  }
 
   async createCart(req: Request, res: Response) {
     try {
