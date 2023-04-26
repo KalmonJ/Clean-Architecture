@@ -1,4 +1,4 @@
-import { AuthInterface } from "./auth.interface";
+import { AuthInterface } from "../../domain/interfaces/auth.interface";
 import * as json from "jsonwebtoken";
 import * as dotenv from "dotenv";
 dotenv.config();
