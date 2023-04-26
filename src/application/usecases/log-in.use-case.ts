@@ -1,7 +1,7 @@
 import { InvalidCredentials } from "../../domain/errors/invalid-credentials.error";
 import { UserNotFound } from "../../domain/errors/user-not-found.error";
-import { AuthInterface } from "../../domain/interfaces/auth.interface";
-import { HashPasswordInterface } from "../../domain/interfaces/hash-password.interface";
+import { AuthInterface } from "../../infra/security/auth.interface";
+import { HashPasswordInterface } from "../../infra/security/hash-password.interface";
 import { UserRepository } from "../../domain/repositories/user.repository";
 
 export class LoginUseCase {
