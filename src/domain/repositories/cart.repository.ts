@@ -1,5 +1,6 @@
 import { CartEntity } from "../entities/cart.entity";
 
-export interface CartRepositoryInterface {
-  insert(cart: CartEntity): Promise<void>;
+export interface CartRepository {
+  insert(cart: CartEntity): Promise<CartEntity>;
+  getById(input: string): Promise<CartEntity>;
 }

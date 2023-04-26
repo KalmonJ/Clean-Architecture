@@ -3,6 +3,11 @@ import { CartSizeError } from "../errors/cart-size.error";
 
 export type CartEntityProps = {
   items: OutputProduct[];
+  vat?: number;
+  shippingValue?: number;
+  total?: number;
+  totalWithVat?: number;
+  finalPrice?: number;
   id: string;
 };
 
@@ -11,6 +16,9 @@ export class CartEntity {
   constructor(props: CartEntityProps) {
     this.props = props;
     this.checkCartSize();
+    this.setTotal();
+    this.setShippingValue();
+    this.setVat();
   }
 
   checkCartSize() {
@@ -19,23 +27,41 @@ export class CartEntity {
     }
   }
 
-  getTotal(): number {
-    return this.props.items.reduce((acc, curr) => acc + curr.price, 0);
-  }
-
-  getTotalWithShipping(shippingValue: number): number {
-    return this.getTotal() + shippingValue;
-  }
-
-  getTotalWithVat(vatPercentage?: number): number {
-    const percentage = vatPercentage || 15;
-    return (this.getTotal() * (100 + percentage)) / 100;
-  }
-
-  getFinalPrice(): number {
-    return (
-      this.getTotalWithVat(15) - this.getTotal() + this.getTotalWithShipping(50)
+  setTotal() {
+    this.props.total = this.props.items.reduce(
+      (acc, curr) => acc + curr.price,
+      0
     );
+  }
+
+  setShippingValue() {
+    if (this.props.total && this.props.total <= 5000) {
+      this.props.shippingValue = 50;
+    }
+    this.props.shippingValue = 0;
+  }
+
+  setVat() {
+    const VAT = 0.2; // 20% vat tax
+
+    if (this.props.total) {
+      this.props.vat = this.props.items.reduce((vat, curr) => {
+        let currVat = curr.price * VAT;
+        currVat = vat + currVat;
+        vat = currVat;
+        return vat;
+      }, 0);
+      this.props.totalWithVat = this.props.total + this.props.vat;
+    }
+
+    this.props.vat = 0;
+  }
+
+  getFinalPrice() {
+    if (this.props.total && this.props.shippingValue && this.props.vat) {
+      this.props.finalPrice =
+        this.props.total + this.props.shippingValue + this.props.vat;
+    }
   }
 
   toJSON() {
