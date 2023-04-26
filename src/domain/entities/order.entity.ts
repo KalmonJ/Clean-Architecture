@@ -1,4 +1,4 @@
-interface OrderEntityProps {
+export interface OrderEntityProps {
   id: string;
   billing: BillingInfo;
   shipphing: ShippingInfo;
