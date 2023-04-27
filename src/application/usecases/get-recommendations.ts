@@ -1,15 +1,15 @@
+import { ProductEntityProps } from "../../domain/entities/product.entity";
 import { ProductRepository } from "../../domain/repositories/product.repository";
-import { OutputProduct } from "./create-product.use-case";
 
 export class GetRecommendationsUseCase {
   constructor(private productRepo: ProductRepository) {}
 
-  async execute(input: string): Promise<OutputProduct[]> {
+  async execute(input: string): Promise<ProductEntityProps[]> {
     const response = await this.productRepo.getAll();
     const products = response
       .map((item) => item.toJSON())
       .filter((product) => product.category === input);
-    const recommendations: OutputProduct[] = [];
+    const recommendations: ProductEntityProps[] = [];
 
     while (recommendations.length < 3) {
       const randomNumber = Math.floor(Math.random() * products.length);

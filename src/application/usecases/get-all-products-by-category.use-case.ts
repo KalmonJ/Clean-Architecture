@@ -1,6 +1,6 @@
+import { ProductEntityProps } from "../../domain/entities/product.entity";
 import { ProductRepository } from "../../domain/repositories/product.repository";
 import { WeekProductsStrategyInterface } from "../../infra/strategies/week-products.strategy.interface";
-import { OutputProduct } from "./create-product.use-case";
 
 export class GetAllProductsByCategoryUseCase {
   constructor(
@@ -24,7 +24,7 @@ export class GetAllProductsByCategoryUseCase {
   }
 }
 
-export interface OutputByCategory extends OutputProduct {
+export interface OutputByCategory extends ProductEntityProps {
   isNewProduct: boolean;
 }
 

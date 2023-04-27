@@ -1,6 +1,6 @@
+import { ProductEntityProps } from "../../domain/entities/product.entity";
 import { ProductRepository } from "../../domain/repositories/product.repository";
 import { WeekProductsStrategyInterface } from "../../infra/strategies/week-products.strategy.interface";
-import { OutputProduct } from "./create-product.use-case";
 
 export class GetAllProductsOfTheWeekUseCase {
   constructor(
@@ -8,7 +8,7 @@ export class GetAllProductsOfTheWeekUseCase {
     private productStrategy: WeekProductsStrategyInterface
   ) {}
 
-  async execute(): Promise<OutputProduct[]> {
+  async execute(): Promise<ProductEntityProps[]> {
     const response = await this.productRepo.getAll();
     const data = await this.productStrategy.weekProducts(response);
     return data;
