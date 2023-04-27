@@ -2,7 +2,7 @@ import express, { Router } from "express";
 import { ExpressRouterInterface } from "./express-router.interface";
 import { CartController } from "../../../controllers/cart.controller";
 
-export class CartsRoutes implements ExpressRouterInterface {
+export class CartRoutes implements ExpressRouterInterface {
   constructor(private cartController: CartController) {}
 
   registerRoutes(): Router {

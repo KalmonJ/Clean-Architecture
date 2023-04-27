@@ -23,20 +23,29 @@ import { LoginUseCase } from "../../../application/usecases/log-in.use-case";
 import { UserDataBaseRepository } from "../../repositories/database/user-database-repository";
 import { Auth } from "../../security/auth";
 import cors from "cors";
+import { CartController } from "../../controllers/cart.controller";
+import { CreateCartUseCase } from "../../../application/usecases/create-cart.use-case";
+import { CartDataBaseRepository } from "../../repositories/database/cart-database-repository";
+import { GetCartUseCase } from "../../../application/usecases/get-cart.use-case";
 
 const app: Express = express();
 
 new Connection().connect();
 
 const productRepo = new ProductDataBaseRepository();
-const productStrategy = new WeekProductsStrategy();
 const userRepo = new UserDataBaseRepository();
+const cartRepo = new CartDataBaseRepository();
+const productStrategy = new WeekProductsStrategy();
 const hashService = new HashPassword();
 const idGenerate = new IdGenerator();
 const auth = new Auth();
 const sendMail = new Mail();
 
 const container = {
+  cartController: new CartController(
+    new CreateCartUseCase(cartRepo, idGenerate),
+    new GetCartUseCase(cartRepo)
+  ),
   authController: new AuthController(
     new LoginUseCase(userRepo, hashService, auth)
   ),
@@ -57,6 +66,7 @@ const container = {
 const userRoutes = new routes.UserRoutes(container.userController);
 const productRoutes = new routes.ProductRoutes(container.productController);
 const authRoutes = new routes.AuthRoutes(container.authController);
+const cartRoutes = new routes.CartRoutes(container.cartController);
 
 app.use(
   express.json(),
@@ -67,7 +77,8 @@ app.use(
   }),
   userRoutes.registerRoutes(),
   productRoutes.registerRoutes(),
-  authRoutes.registerRoutes()
+  authRoutes.registerRoutes(),
+  cartRoutes.registerRoutes()
 );
 
 app.listen(4040, () => {

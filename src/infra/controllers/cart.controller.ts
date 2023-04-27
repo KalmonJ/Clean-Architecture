@@ -12,6 +12,8 @@ export class CartController {
   }
 
   async createCart(req: Request, res: Response) {
+    console.log("hello", req.body);
+
     try {
       await this.createCartUseCase.execute(req.body);
       return res
