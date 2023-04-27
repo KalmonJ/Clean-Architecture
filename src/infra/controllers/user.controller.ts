@@ -1,7 +1,7 @@
+import { SendEmailRegisterUseCase } from "../../application/usecases/send-email-register.use-case";
 import { CreateUserUseCase } from "../../application/usecases/create-user.use-case";
 import { UpdateUserUseCase } from "../../application/usecases/update-user.use-case";
 import { Request, Response } from "express";
-import { SendEmailRegisterUseCase } from "../../application/usecases/send-email-register.use-case";
 
 export class UserController {
   constructor(
@@ -19,13 +19,13 @@ export class UserController {
         throw new Error(user.error);
       }
 
-      // await this.sendMail.execute({
-      //   from: "kalmonkk69@gmail.com",
-      //   to: user.email,
-      //   subject: "Account created",
-      //   text: "Hello this is email test!",
-      //   message: "Hello this is email test!",
-      // });
+      await this.sendMail.execute({
+        from: "kalmonkk69@gmail.com",
+        to: user.email,
+        subject: "Account created",
+        text: "Hello this is email test!",
+        message: "Hello this is email test!",
+      });
       return res.status(201).json(user);
     } catch (error: any) {
       return res.status(400).json({ message: error.message });

@@ -1,4 +1,7 @@
-import { ProductEntity } from "../../domain/entities/product.entity";
+import {
+  ProductEntity,
+  ProductEntityProps,
+} from "../../domain/entities/product.entity";
 import { IdGeneratorInterface } from "../../domain/interfaces/id-generator.interface";
 import { ProductRepository } from "../../domain/repositories/product.repository";
 
@@ -8,7 +11,7 @@ export class CreateProductUseCase {
     private idGenerate: IdGeneratorInterface
   ) {}
 
-  async execute(input: InputProduct): Promise<void> {
+  async execute(input: ProductEntityProps): Promise<void> {
     try {
       const product = new ProductEntity({
         ...input,
@@ -20,32 +23,3 @@ export class CreateProductUseCase {
     }
   }
 }
-
-export type InputProduct = {
-  name: string;
-  images?: {
-    thumbnail: string;
-    presentation: string[];
-  };
-  description: string;
-  price: number;
-  creationDate: Date;
-  features: string;
-  inTheBox: InTheBox[];
-  category: "HEADPHONES" | "SPEAKERS" | "EARPHONES";
-};
-
-export type InTheBox = {
-  name: string;
-  quantity: 1;
-};
-
-export type OutputProduct = {
-  id: string;
-  name: string;
-  image?: string;
-  description: string;
-  price: number;
-  creationDate: Date;
-  category: "HEADPHONES" | "SPEAKERS" | "EARPHONES";
-};

@@ -66,4 +66,12 @@ export type ProductEntityProps = {
   image?: string;
   creationDate: Date;
   category: Category;
+  features: string;
+  inTheBox: InTheBox[];
+  quantity: number;
+};
+
+export type InTheBox = {
+  name: string;
+  quantity: 1;
 };

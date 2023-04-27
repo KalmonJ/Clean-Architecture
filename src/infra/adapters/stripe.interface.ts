@@ -1,3 +1,3 @@
 export interface StripeInterface {
-  checkout(): Promise<any>;
+  checkout(items: any[]): Promise<string | null>;
 }
