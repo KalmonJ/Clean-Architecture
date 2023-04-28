@@ -1,5 +1,7 @@
-import { OutputProduct } from "../../application/usecases/create-product.use-case";
-import { ProductEntity } from "../../domain/entities/product.entity";
+import {
+  ProductEntity,
+  ProductEntityProps,
+} from "../../domain/entities/product.entity";
 import { WeekProductsStrategyInterface } from "./week-products.strategy.interface";
 
 export class WeekProductsStrategy implements WeekProductsStrategyInterface {
@@ -17,7 +19,7 @@ export class WeekProductsStrategy implements WeekProductsStrategyInterface {
     return days <= input;
   }
 
-  async weekProducts(products: ProductEntity[]): Promise<OutputProduct[]> {
+  async weekProducts(products: ProductEntity[]): Promise<ProductEntityProps[]> {
     const data = products
       .map((product) => product.toJSON())
       .filter((el) => this.compareWith(7 * 4, el.creationDate));

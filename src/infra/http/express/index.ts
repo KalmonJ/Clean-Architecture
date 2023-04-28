@@ -29,6 +29,7 @@ import { CartDataBaseRepository } from "../../repositories/database/cart-databas
 import { GetCartUseCase } from "../../../application/usecases/get-cart.use-case";
 import { OrderController } from "../../controllers/order.controller";
 import { CreateOrderUseCase } from "../../../application/usecases/create-order.use-case";
+import { OrderDataBaseRepository } from "../../repositories/database/order-database-repository";
 
 const app: Express = express();
 
@@ -37,7 +38,7 @@ new Connection().connect();
 const productRepo = new ProductDataBaseRepository();
 const userRepo = new UserDataBaseRepository();
 const cartRepo = new CartDataBaseRepository();
-const orderRepo = new OrderData();
+const orderRepo = new OrderDataBaseRepository();
 const productStrategy = new WeekProductsStrategy();
 const hashService = new HashPassword();
 const idGenerate = new IdGenerator();
@@ -45,7 +46,9 @@ const auth = new Auth();
 const sendMail = new Mail();
 
 const container = {
-  orderController: new OrderController(new CreateOrderUseCase(order)),
+  orderController: new OrderController(
+    new CreateOrderUseCase(orderRepo, idGenerate)
+  ),
   cartController: new CartController(
     new CreateCartUseCase(cartRepo, idGenerate),
     new GetCartUseCase(cartRepo)
@@ -71,7 +74,7 @@ const userRoutes = new routes.UserRoutes(container.userController);
 const productRoutes = new routes.ProductRoutes(container.productController);
 const authRoutes = new routes.AuthRoutes(container.authController);
 const cartRoutes = new routes.CartRoutes(container.cartController);
-const orderRoutes = new routes.OrderRoutes();
+const orderRoutes = new routes.OrderRoutes(container.orderController);
 
 app.use(
   express.json(),

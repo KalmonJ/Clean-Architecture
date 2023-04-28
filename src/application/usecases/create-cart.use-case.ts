@@ -1,7 +1,7 @@
 import { CartEntity } from "../../domain/entities/cart.entity";
+import { ProductEntityProps } from "../../domain/entities/product.entity";
 import { IdGeneratorInterface } from "../../domain/interfaces/id-generator.interface";
 import { CartRepository } from "../../domain/repositories/cart.repository";
-import { OutputProduct } from "./create-product.use-case";
 import { GetCartUseCase } from "./get-cart.use-case";
 import { UpdateCartUseCase } from "./update-cart.use-case";
 
@@ -24,5 +24,5 @@ export class CreateCartUseCase {
 }
 
 export type InputCart = {
-  items: OutputProduct[];
+  items: ProductEntityProps[];
 };

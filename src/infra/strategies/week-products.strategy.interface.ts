@@ -1,7 +1,9 @@
-import { OutputProduct } from "../../application/usecases/create-product.use-case";
-import { ProductEntity } from "../../domain/entities/product.entity";
+import {
+  ProductEntity,
+  ProductEntityProps,
+} from "../../domain/entities/product.entity";
 
 export interface WeekProductsStrategyInterface {
-  weekProducts(products: ProductEntity[]): Promise<OutputProduct[]>;
+  weekProducts(products: ProductEntity[]): Promise<ProductEntityProps[]>;
   compareWith(input: number, otherDate: Date): boolean;
 }

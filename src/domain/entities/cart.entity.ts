@@ -1,8 +1,8 @@
-import { OutputProduct } from "../../application/usecases/create-product.use-case";
 import { CartSizeError } from "../errors/cart-size.error";
+import { ProductEntityProps } from "./product.entity";
 
 export type CartEntityProps = {
-  items: OutputProduct[];
+  items: ProductEntityProps[];
   vat?: number;
   shippingValue?: number;
   total?: number;
