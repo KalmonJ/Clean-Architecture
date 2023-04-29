@@ -1,3 +1,5 @@
+import { ProductEntityProps } from "../../domain/entities/product.entity";
+
 export interface StripeInterface {
-  checkout(items: any[]): Promise<string | null>;
+  checkout(items: ProductEntityProps[]): Promise<string | null>;
 }
