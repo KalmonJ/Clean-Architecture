@@ -11,11 +11,7 @@ export class OrderRoutes implements ExpressRouterInterface {
     const router = express.Router();
     router
       .post("/order", this.orderController.createOrder)
-      .post("/create-checkout", async (req, res) => {
-        const stripe = new StripeAdapter();
-        const url = await stripe.checkout([{ name: "any" }]);
-        res.status(303).json(url);
-      });
+      .post("/create-checkout");
     return router;
   }
 }
