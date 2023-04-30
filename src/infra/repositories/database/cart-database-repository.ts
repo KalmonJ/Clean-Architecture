@@ -13,6 +13,7 @@ export class CartDataBaseRepository implements CartRepository {
     await response.save();
   }
   async getById(input: string): Promise<CartEntity> {
-    return (await cartModel.findById(input)) as CartEntity;
+    const response = (await cartModel.find({ id: input })) as any;
+    return response[0];
   }
 }

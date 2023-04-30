@@ -1,8 +1,7 @@
 import { ExpressRouterInterface } from "./express-router.interface";
+import { OrderController } from "../../../controllers/order.controller";
 import { Router } from "express";
 import express from "express";
-import { OrderController } from "../../../controllers/order.controller";
-import { StripeAdapter } from "../../../adapters/stripe";
 
 export class OrderRoutes implements ExpressRouterInterface {
   constructor(private orderController: OrderController) {}
@@ -11,7 +10,7 @@ export class OrderRoutes implements ExpressRouterInterface {
     const router = express.Router();
     router
       .post("/order", this.orderController.createOrder)
-      .post("/create-checkout");
+      .post("/create-checkout", this.orderController.createCheckout);
     return router;
   }
 }

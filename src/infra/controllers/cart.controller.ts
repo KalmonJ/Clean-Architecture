@@ -13,7 +13,7 @@ export class CartController {
 
   async createCart(req: Request, res: Response) {
     try {
-      await this.createCartUseCase.execute(req.body);
+      await this.createCartUseCase.execute({ items: req.body.items });
       return res
         .status(201)
         .json({ success: true, message: "Cart successfuly created!" });

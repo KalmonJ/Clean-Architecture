@@ -22,7 +22,7 @@ export class CartEntity {
   }
 
   checkCartSize() {
-    if (this.props.items.length > 10) {
+    if (this.props.items && this.props.items.length > 10) {
       throw new CartSizeError();
     }
   }
