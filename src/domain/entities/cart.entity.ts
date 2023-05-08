@@ -1,30 +1,30 @@
-import { CartSizeError } from "../errors/cart-size.error";
-import { ProductEntityProps } from "./product.entity";
+import { productSchema } from "./product.entity";
+import z from "zod";
 
-export type CartEntityProps = {
-  items: ProductEntityProps[];
-  vat?: number;
-  shippingValue?: number;
-  total?: number;
-  totalWithVat?: number;
-  finalPrice?: number;
-  id: string;
-};
+const cartSchema = z.object({
+  id: z.string().uuid(),
+  owner: z.string(),
+  finalPrice: z.number().optional(),
+  total: z.number().optional(),
+  totalWithVat: z.number().optional(),
+  shippingValue: z.number().optional(),
+  vat: z.number().optional(),
+  items: z
+    .array(productSchema)
+    .length(10, { message: "Cart must have a max 10 items" }),
+});
+
+export type CartEntityProps = z.infer<typeof cartSchema>;
 
 export class CartEntity {
   props: CartEntityProps;
+
   constructor(props: CartEntityProps) {
-    this.props = props;
-    this.checkCartSize();
+    this.props = cartSchema.parse(props);
     this.setTotal();
     this.setShippingValue();
     this.setVat();
-  }
-
-  checkCartSize() {
-    if (this.props.items && this.props.items.length > 10) {
-      throw new CartSizeError();
-    }
+    this.setFinalPrice();
   }
 
   setTotal() {
@@ -37,8 +37,9 @@ export class CartEntity {
   setShippingValue() {
     if (this.props.total && this.props.total <= 5000) {
       this.props.shippingValue = 50;
+    } else {
+      this.props.shippingValue = 0;
     }
-    this.props.shippingValue = 0;
   }
 
   setVat() {
@@ -52,15 +53,17 @@ export class CartEntity {
         return vat;
       }, 0);
       this.props.totalWithVat = this.props.total + this.props.vat;
+    } else {
+      this.props.vat = 0;
     }
-
-    this.props.vat = 0;
   }
 
-  getFinalPrice() {
+  setFinalPrice() {
     if (this.props.total && this.props.shippingValue && this.props.vat) {
       this.props.finalPrice =
         this.props.total + this.props.shippingValue + this.props.vat;
+    } else {
+      this.props.finalPrice = 0;
     }
   }
 

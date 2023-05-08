@@ -60,6 +60,7 @@ const container = {
   userController: new UserController(
     new CreateUserUseCase(userRepo, hashService, idGenerate),
     new UpdateUserUseCase(userRepo),
+    new CreateCartUseCase(cartRepo, idGenerate),
     new SendEmailRegisterUseCase(sendMail)
   ),
   productController: new ProductController(

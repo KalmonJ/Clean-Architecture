@@ -4,5 +4,6 @@ import { CartEntity } from "../entities/cart.entity";
 export interface CartRepository {
   insert(cart: CartEntity): Promise<void>;
   getById(input: string): Promise<CartEntity>;
-  update(id: string, input: InputCart): Promise<boolean>;
+  update(id: string, input: CartEntity): Promise<any>;
+  findByOwner(owner: string): Promise<any>;
 }

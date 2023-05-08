@@ -15,6 +15,7 @@ const Schema = new mongoose.Schema(
         quantity: { type: Number, required: true },
       },
     ],
+    quantity: { type: Number, required: true },
   },
   {
     timestamps: true,

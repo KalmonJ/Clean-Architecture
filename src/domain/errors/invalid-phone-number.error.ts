@@ -1,6 +1,6 @@
 export class InvalidPhoneNumberError extends Error {
-  super(message: "Invalid phone number") {
-    this.message = message;
+  super() {
+    this.message = "Invalid phone number";
     this.name = "InvalidPhoneNumberError";
   }
 }

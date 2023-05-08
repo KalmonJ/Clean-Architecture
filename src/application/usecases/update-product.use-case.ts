@@ -1,3 +1,4 @@
+import { ProductEntity } from "../../domain/entities/product.entity";
 import { OutputError } from "../../domain/interfaces/error.interface";
 import { ProductRepository } from "../../domain/repositories/product.repository";
 

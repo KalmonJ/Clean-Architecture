@@ -1,54 +1,52 @@
 import { GreaterThanError } from "../errors/greater-than.error";
 import { NameLongError } from "../errors/name-long.error";
+import z from "zod";
+
+const categoryEnum = z.enum(["HEADPHONES", "SPEAKERS", "EARPHONES"]);
+
+const inTheBoxSchema = z.object({
+  name: z.string(),
+  quantity: z.number().positive(),
+});
+
+export const productSchema = z.object({
+  id: z.string().uuid(),
+  price: z.number(),
+  name: z
+    .string()
+    .trim()
+    .max(30, { message: "Name is too long" })
+    .min(0, { message: "Invalid product name" }),
+  description: z.string(),
+  image: z.string().optional(),
+  creationDate: z.date(),
+  category: categoryEnum,
+  features: z.string(),
+  quantity: z.number().positive(),
+  inTheBox: z.array(inTheBoxSchema),
+});
 
 export class ProductEntity {
   props: ProductEntityProps;
   constructor(props: ProductEntityProps) {
-    this.props = {
-      ...props,
-      name: props.name.trim(),
-    };
-    this.verifyPrice();
-    this.verifyName();
-  }
-
-  verifyPrice() {
-    if (this.props.price <= 0) {
-      throw new GreaterThanError(
-        "The product value must be greater than or equal to 0"
-      );
-    }
-  }
-
-  verifyName() {
-    if (this.props.name.length > 30) {
-      throw new NameLongError("Product name is too long");
-    }
-
-    if (this.props.name.length === 0) {
-      throw new GreaterThanError("Product name must be greater than 0");
-    }
+    this.props = productSchema.parse(props);
   }
 
   update(values: Partial<ProductEntityProps>) {
     if (values.name) {
-      this.props.name = values.name;
+      this.props.name = productSchema.shape.name.parse(values.name);
     }
-
     if (values.price) {
-      this.props.price = values.price;
+      this.props.price = productSchema.shape.price.parse(values.price);
     }
-
     if (values.description) {
-      this.props.description = values.description;
+      this.props.description = productSchema.shape.description.parse(
+        values.description
+      );
     }
-
     if (values.image) {
-      this.props.image = values.image;
+      this.props.image = productSchema.shape.image.parse(values.image);
     }
-
-    this.verifyName();
-    this.verifyPrice();
   }
 
   toJSON() {
@@ -56,22 +54,6 @@ export class ProductEntity {
   }
 }
 
-export type Category = "HEADPHONES" | "SPEAKERS" | "EARPHONES";
-
-export type ProductEntityProps = {
-  id: string;
-  price: number;
-  name: string;
-  description: string;
-  image?: string;
-  creationDate: Date;
-  category: Category;
-  features: string;
-  inTheBox: InTheBox[];
-  quantity: number;
-};
-
-export type InTheBox = {
-  name: string;
-  quantity: 1;
-};
+export type Category = z.infer<typeof categoryEnum>;
+export type ProductEntityProps = z.infer<typeof productSchema>;
+export type InTheBox = z.infer<typeof inTheBoxSchema>;

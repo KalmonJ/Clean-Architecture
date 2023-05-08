@@ -8,6 +8,7 @@ const Schema = new mongoose.Schema(
     phone: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
+    cart: { type: mongoose.Schema.Types.ObjectId, ref: "Carts" },
   },
   {
     timestamps: true,
