@@ -5,14 +5,14 @@ dotenv.config();
 
 export class Auth implements AuthInterface {
   verify(token: string, callback: (err: any, user: any) => void) {
-    json.verify(token, "anyyy" as string, callback);
+    json.verify(token, process.env.JWT_SECRET as string, callback);
   }
   async createToken(payload: object): Promise<string> {
     return json.sign(
       {
         data: payload,
       },
-      "anyyy" as string,
+      process.env.JWT_SECRET as string,
       {
         expiresIn: "1 day",
       }

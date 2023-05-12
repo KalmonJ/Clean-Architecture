@@ -1,5 +1,4 @@
 import { UserEntity, UserEntityProps } from "../../domain/entities/user.entity";
-import { OutputError } from "../../domain/interfaces/error.interface";
 import { HashPasswordInterface } from "../../infra/security/hash-password.interface";
 import { IdGeneratorInterface } from "../../domain/interfaces/id-generator.interface";
 import { UserRepository } from "../../domain/repositories/user.repository";

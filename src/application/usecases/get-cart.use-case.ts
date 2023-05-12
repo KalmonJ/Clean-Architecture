@@ -8,7 +8,7 @@ export class GetCartUseCase {
     if (!response) {
       throw new Error("Cart not found!");
     }
-    return response.toJSON() as OutputGetCart;
+    return response as OutputGetCart;
   }
 }
 

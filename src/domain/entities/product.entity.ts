@@ -1,6 +1,5 @@
-import { GreaterThanError } from "../errors/greater-than.error";
-import { NameLongError } from "../errors/name-long.error";
 import z from "zod";
+import { ErrorMessages } from "../errors/enum";
 
 const categoryEnum = z.enum(["HEADPHONES", "SPEAKERS", "EARPHONES"]);
 
@@ -15,8 +14,8 @@ export const productSchema = z.object({
   name: z
     .string()
     .trim()
-    .max(30, { message: "Name is too long" })
-    .min(0, { message: "Invalid product name" }),
+    .max(30, { message: ErrorMessages.PRODUCT_NAME })
+    .min(0, { message: ErrorMessages.PRODUCT_NAME }),
   description: z.string(),
   image: z.string().optional(),
   creationDate: z.date(),

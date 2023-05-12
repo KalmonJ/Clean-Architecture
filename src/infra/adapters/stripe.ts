@@ -5,10 +5,10 @@ import Stripe from "stripe";
 export class StripeAdapter implements StripeInterface {
   prices: Stripe.Price[] | null = null;
   products: Stripe.Product[] | null = null;
-  stripe = new Stripe(
-    "sk_test_51N1KYRIakDSlzaqYf85gCrqeK0jMTIR235qhYdGmvhXJ3rstaOOPCQAMsKAjvxGkfJxtoYv4Yz7eionZEQ3TaS6f006XdjhJB4",
-    { typescript: true, apiVersion: "2022-11-15" }
-  );
+  stripe = new Stripe(process.env.STRIPE_SECRET as string, {
+    typescript: true,
+    apiVersion: "2022-11-15",
+  });
 
   private async createProduct(cartItems: ProductEntityProps[]) {
     const productsResult = cartItems.map(

@@ -1,3 +1,4 @@
+import { ErrorMessages } from "../errors/enum";
 import { productSchema } from "./product.entity";
 import z from "zod";
 
@@ -11,7 +12,7 @@ const cartSchema = z.object({
   vat: z.number().optional(),
   items: z
     .array(productSchema)
-    .length(10, { message: "Cart must have a max 10 items" }),
+    .length(10, { message: ErrorMessages.CART_LENGHT }),
 });
 
 export type CartEntityProps = z.infer<typeof cartSchema>;

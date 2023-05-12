@@ -1,14 +1,17 @@
 import { InputCart } from "../../../application/usecases/create-cart.use-case";
-import { CartEntity } from "../../../domain/entities/cart.entity";
+import {
+  CartEntity,
+  CartEntityProps,
+} from "../../../domain/entities/cart.entity";
 import { CartRepository } from "../../../domain/repositories/cart.repository";
 import cartModel from "./mongoDB/schemas/carts.model";
 
 export class CartDataBaseRepository implements CartRepository {
-  async findByOwner(owner: string): Promise<CartEntity> {
-    const response: any = await cartModel.findOne({ owner });
+  async findByOwner(owner: string): Promise<CartEntityProps | null> {
+    const response = await cartModel.findOne({ owner });
     return response;
   }
-  async update(id: string, input: CartEntity): Promise<any> {
+  async update(id: string, input: CartEntity): Promise<CartEntityProps | null> {
     const {
       items,
       owner,
@@ -41,11 +44,8 @@ export class CartDataBaseRepository implements CartRepository {
     const response = new cartModel(cart.toJSON());
     await response.save();
   }
-  async getById(input: string): Promise<CartEntity> {
-    const response = await cartModel.findOne({ id: input }, {});
-
-    console.log(response, input, "resposta333333");
-
-    return null as any;
+  async getById(input: string): Promise<CartEntityProps | null> {
+    const response = await cartModel.findOne({ id: input });
+    return response;
   }
 }
