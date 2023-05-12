@@ -7,12 +7,8 @@ import productsModel from "./mongoDB/schemas/products.model";
 
 export class ProductDataBaseRepository implements ProductRepository {
   async insert(product: ProductEntity): Promise<void> {
-    try {
-      const response = new productsModel(product.toJSON());
-      await response.save();
-    } catch (error) {
-      console.log(error, "erro");
-    }
+    const response = new productsModel(product.toJSON());
+    await response.save();
   }
   async findById(id: string): Promise<ProductEntity> {
     return (await productsModel.findById(id)) as ProductEntity;

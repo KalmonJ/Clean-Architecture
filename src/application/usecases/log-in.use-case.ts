@@ -1,5 +1,3 @@
-import { InvalidCredentials } from "../../domain/errors/invalid-credentials.error";
-import { UserNotFound } from "../../domain/errors/user-not-found.error";
 import { AuthInterface } from "../../infra/security/auth.interface";
 import { HashPasswordInterface } from "../../infra/security/hash-password.interface";
 import { UserRepository } from "../../domain/repositories/user.repository";
@@ -12,9 +10,9 @@ export class LoginUseCase {
   ) {}
   async execute(input: InputLogin): Promise<OutputLogin> {
     const user = await this.usersRepo.findByEmail(input.email);
-    if (!user) throw new UserNotFound();
+    if (!user) throw new Error("User not found");
     const match = await this.hashService.compare(input.password, user.password);
-    if (!match) throw new InvalidCredentials();
+    if (!match) throw new Error("Invalid credentials");
     return {
       token: await this.auth.createToken({
         username: user.username,

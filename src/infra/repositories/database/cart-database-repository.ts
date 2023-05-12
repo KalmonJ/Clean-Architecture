@@ -1,4 +1,3 @@
-import { InputCart } from "../../../application/usecases/create-cart.use-case";
 import {
   CartEntity,
   CartEntityProps,

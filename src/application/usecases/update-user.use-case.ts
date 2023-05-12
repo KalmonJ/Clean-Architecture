@@ -1,4 +1,3 @@
-import { UserNotFound } from "../../domain/errors/user-not-found.error";
 import { UserRepository } from "../../domain/repositories/user.repository";
 
 export class UpdateUserUseCase {
@@ -7,7 +6,7 @@ export class UpdateUserUseCase {
   async execute(id: string, input: InputUpdateUser): Promise<boolean> {
     const user = await this.userRepo.findById(id);
 
-    if (!user) throw new UserNotFound();
+    if (!user) throw new Error("User not found");
 
     user.update(input);
     const updated = await this.userRepo.update(id, user);
