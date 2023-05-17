@@ -9,6 +9,7 @@ export class CartRoutes implements ExpressRouterInterface {
     const router = express.Router();
     router.post("/cart", this.cartController.createCart);
     router.get("/cart/:id", this.cartController.getCart);
+    router.put("/cart/:id", this.cartController.updateCart);
 
     return router;
   }

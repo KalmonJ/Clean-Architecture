@@ -1,3 +1,4 @@
+import { isDate } from "../../application/usecases/get-all-products-by-category.use-case";
 import {
   ProductEntity,
   ProductEntityProps,
@@ -22,7 +23,12 @@ export class WeekProductsStrategy implements WeekProductsStrategyInterface {
   async weekProducts(products: ProductEntity[]): Promise<ProductEntityProps[]> {
     const data = products
       .map((product) => product.toJSON())
-      .filter((el) => this.compareWith(7 * 4, el.creationDate));
+      .filter((el) =>
+        this.compareWith(
+          7 * 10,
+          isDate(el.creationDate) ? el.creationDate : new Date(el.creationDate)
+        )
+      );
     return data;
   }
 }

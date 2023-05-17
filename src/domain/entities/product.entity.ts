@@ -18,7 +18,7 @@ export const productSchema = z.object({
     .min(0, { message: ErrorMessages.PRODUCT_NAME }),
   description: z.string(),
   image: z.string().optional(),
-  creationDate: z.date(),
+  creationDate: z.union([z.date(), z.string()]),
   category: categoryEnum,
   features: z.string(),
   quantity: z.number().positive(),

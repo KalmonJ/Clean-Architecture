@@ -7,7 +7,9 @@ import usersModel from "./mongoDB/schemas/users.model";
 
 export class UserDataBaseRepository implements UserRepository {
   async insert(user: UserEntity): Promise<UserEntityProps> {
-    const response = new usersModel(user.toJSON());
+    console.log(user, "uahuashdahsduahsdauhsd");
+
+    const response = new usersModel(user.props);
     const savedUser = await response.save();
     return savedUser;
   }

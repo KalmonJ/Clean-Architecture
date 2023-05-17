@@ -4,7 +4,7 @@ const Schema = new mongoose.Schema(
   {
     id: { type: String, required: true },
     owner: { type: String, required: true },
-    items: [],
+    items: { type: Array, required: true },
     vat: { type: Number, required: true },
     total: { type: Number, required: true },
     finalPrice: { type: Number, required: true },

@@ -30,6 +30,7 @@ import { GetCartUseCase } from "../../../application/usecases/get-cart.use-case"
 import { OrderController } from "../../controllers/order.controller";
 import { CreateOrderUseCase } from "../../../application/usecases/create-order.use-case";
 import { OrderDataBaseRepository } from "../../repositories/database/order-database-repository";
+import { UpdateCartUseCase } from "../../../application/usecases/update-cart.use-case";
 
 const app: Express = express();
 
@@ -51,7 +52,8 @@ const container = {
   ),
   cartController: new CartController(
     new CreateCartUseCase(cartRepo, idGenerate),
-    new GetCartUseCase(cartRepo)
+    new GetCartUseCase(cartRepo),
+    new UpdateCartUseCase(cartRepo)
   ),
   authController: new AuthController(
     new LoginUseCase(userRepo, hashService, auth)

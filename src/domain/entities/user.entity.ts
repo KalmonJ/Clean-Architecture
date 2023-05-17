@@ -5,8 +5,8 @@ const userSchema = z.object({
   image: z.string().optional(),
   username: z
     .string()
-    .max(27, { message: ErrorMessages.USERNAME_SIZE })
-    .min(6, { message: ErrorMessages.USERNAME_SIZE }),
+    .min(6, { message: ErrorMessages.USERNAME_SIZE })
+    .max(27, { message: ErrorMessages.USERNAME_SIZE }),
   password: z
     .string()
     .max(100, { message: ErrorMessages.PASSWORD_SIZE })
@@ -19,7 +19,6 @@ const userSchema = z.object({
 });
 
 export type UserEntityProps = z.infer<typeof userSchema>;
-
 export class UserEntity {
   props: UserEntityProps;
   constructor(props: UserEntityProps) {
@@ -28,19 +27,19 @@ export class UserEntity {
 
   update(user: Partial<UserEntityProps>) {
     if (user.email) {
-      this.props.email = userSchema.shape.email.parse(user.email);
+      this.props.email = user.email;
     }
 
     if (user.phone) {
-      this.props.phone = userSchema.shape.phone.parse(user.phone);
+      this.props.phone = user.phone;
     }
 
     if (user.username) {
-      this.props.username = userSchema.shape.username.parse(user.username);
+      this.props.username = user.username;
     }
 
     if (user.image) {
-      this.props.image = userSchema.shape.image.parse(user.image);
+      this.props.image = user.image;
     }
   }
 

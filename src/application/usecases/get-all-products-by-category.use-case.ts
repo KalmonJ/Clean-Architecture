@@ -17,7 +17,9 @@ export class GetAllProductsByCategoryUseCase {
         ...el.toJSON(),
         isNewProduct: this.productStrategy.compareWith(
           7,
-          el.props.creationDate
+          isDate(el.props.creationDate)
+            ? el.props.creationDate
+            : new Date(el.props.creationDate)
         ),
       }))
     );
@@ -27,6 +29,10 @@ export class GetAllProductsByCategoryUseCase {
 export interface OutputByCategory extends ProductEntityProps {
   isNewProduct: boolean;
 }
+
+export const isDate = (arg: string | Date): arg is Date => {
+  return typeof arg === "object" && !!arg;
+};
 
 export type InputGetAllProductsByCategory = {
   category: "HEADPHONES" | "SPEAKERS" | "EARPHONES";

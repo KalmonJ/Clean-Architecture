@@ -9,7 +9,9 @@ export class HashPassword implements HashPasswordInterface {
   }
 
   async encrypt(password: string): Promise<string> {
-    return await bcrypt.hash(password, this.salt);
+    console.log(password, "senhaaaaaaaa");
+
+    return await bcrypt.hash(password, 10);
   }
 
   async compare(password: string, encrypted: string): Promise<boolean> {

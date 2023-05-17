@@ -11,13 +11,20 @@ export class CreateUserUseCase {
   ) {}
 
   async execute(input: InputUser): Promise<UserEntityProps> {
+    console.log(input, "inputttttttttttt");
+
     const encryptPassword = await this.hashService.encrypt(input.password);
+
     const user = new UserEntity({
       ...input,
       password: encryptPassword,
       id: this.idGenerate.generate(),
     });
+
+    console.log(user, "usuaaaaaaaaaaaaaaarioooo");
+
     const response = await this.userRepo.insert(user);
+
     return response;
   }
 }

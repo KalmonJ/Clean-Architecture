@@ -10,9 +10,7 @@ const cartSchema = z.object({
   totalWithVat: z.number().optional(),
   shippingValue: z.number().optional(),
   vat: z.number().optional(),
-  items: z
-    .array(productSchema)
-    .length(10, { message: ErrorMessages.CART_LENGHT }),
+  items: z.array(productSchema),
 });
 
 export type CartEntityProps = z.infer<typeof cartSchema>;
@@ -30,7 +28,7 @@ export class CartEntity {
 
   setTotal() {
     this.props.total = this.props.items.reduce(
-      (acc, curr) => acc + curr.price,
+      (acc, curr) => acc + curr.price * curr.quantity,
       0
     );
   }

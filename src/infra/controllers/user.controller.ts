@@ -17,7 +17,10 @@ export class UserController {
   async createUser(req: Request, res: Response) {
     try {
       const user = await this.createUserUseCase.execute(req.body);
-      await this.createCartUserCase.execute({ owner: user.id, items: [] });
+
+      console.log(user, "usuáriooo");
+
+      // await this.createCartUserCase.execute({ owner: user.id, items: [] });
 
       // await this.sendMail.execute({
       //   from: "kalmonkk69@gmail.com",
@@ -28,6 +31,7 @@ export class UserController {
       // });
       return res.status(201).json(user);
     } catch (error: any) {
+      console.log(error, "errroooooooo");
       return res.status(400).json(error);
     }
   }

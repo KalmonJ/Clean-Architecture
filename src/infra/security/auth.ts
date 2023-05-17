@@ -1,6 +1,6 @@
 import { AuthInterface } from "./auth.interface";
 import * as json from "jsonwebtoken";
-import * as dotenv from "dotenv";
+import dotenv from "dotenv";
 dotenv.config();
 
 export class Auth implements AuthInterface {
