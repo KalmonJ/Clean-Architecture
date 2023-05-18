@@ -3,7 +3,6 @@ import { productSchema } from "./product.entity";
 import z from "zod";
 
 const cartSchema = z.object({
-  id: z.string().uuid(),
   owner: z.string(),
   finalPrice: z.number().optional(),
   total: z.number().optional(),
@@ -54,6 +53,7 @@ export class CartEntity {
       this.props.totalWithVat = this.props.total + this.props.vat;
     } else {
       this.props.vat = 0;
+      this.props.totalWithVat = 0;
     }
   }
 

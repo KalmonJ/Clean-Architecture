@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const Schema = new mongoose.Schema(
   {
+    _id: { type: String, required: true },
     billing: {
       name: { type: String, required: true },
       email: { type: String, required: true },

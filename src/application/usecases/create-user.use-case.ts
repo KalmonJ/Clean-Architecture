@@ -1,7 +1,10 @@
 import { UserEntity, UserEntityProps } from "../../domain/entities/user.entity";
 import { HashPasswordInterface } from "../../infra/security/hash-password.interface";
 import { IdGeneratorInterface } from "../../domain/interfaces/id-generator.interface";
-import { UserRepository } from "../../domain/repositories/user.repository";
+import {
+  UserOutputDto,
+  UserRepository,
+} from "../../domain/repositories/user.repository";
 
 export class CreateUserUseCase {
   constructor(
@@ -10,7 +13,7 @@ export class CreateUserUseCase {
     private idGenerate: IdGeneratorInterface
   ) {}
 
-  async execute(input: InputUser): Promise<UserEntityProps> {
+  async execute(input: InputUser): Promise<UserOutputDto> {
     console.log(input, "inputttttttttttt");
 
     const encryptPassword = await this.hashService.encrypt(input.password);
@@ -18,7 +21,6 @@ export class CreateUserUseCase {
     const user = new UserEntity({
       ...input,
       password: encryptPassword,
-      id: this.idGenerate.generate(),
     });
 
     console.log(user, "usuaaaaaaaaaaaaaaarioooo");

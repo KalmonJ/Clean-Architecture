@@ -6,10 +6,10 @@ export class UpdateCartUseCase {
   constructor(private cartRepo: CartRepository) {}
 
   async execute(id: string, input: InputCart): Promise<void> {
-    const cart = new CartEntity({ id, items: input.items, owner: input.owner });
-
-    console.log(cart, "carrt");
-
+    const cart = new CartEntity({
+      items: input.items,
+      owner: input.owner,
+    });
     const response = await this.cartRepo.update(id, cart);
     if (!response) {
       throw new Error("Cart not found!");

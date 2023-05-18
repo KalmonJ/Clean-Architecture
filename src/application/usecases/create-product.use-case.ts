@@ -15,7 +15,7 @@ export class CreateProductUseCase {
     try {
       const product = new ProductEntity({
         ...input,
-        id: this.idGenerate.generate(),
+        _id: this.idGenerate.generate(),
       });
       await this.productRepo.insert(product);
     } catch (error: any) {

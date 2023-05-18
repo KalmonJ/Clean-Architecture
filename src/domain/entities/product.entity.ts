@@ -9,7 +9,7 @@ const inTheBoxSchema = z.object({
 });
 
 export const productSchema = z.object({
-  id: z.string().uuid(),
+  _id: z.string().uuid(),
   price: z.number(),
   name: z
     .string()

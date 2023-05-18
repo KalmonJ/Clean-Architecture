@@ -22,7 +22,7 @@ export class LoginUseCase {
         email: user.email,
         image: user.image,
         phone: user.phone,
-        id: user.id,
+        id: user._id,
       }),
     };
   }

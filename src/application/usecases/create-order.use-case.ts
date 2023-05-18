@@ -13,7 +13,6 @@ export class CreateOrderUseCase {
 
   async execute(input: InputCreateOrder): Promise<void> {
     const order = new OrderEntity({
-      id: this.idGenerate.generate(),
       ...input,
     });
     await this.orderRepo.insert(order);

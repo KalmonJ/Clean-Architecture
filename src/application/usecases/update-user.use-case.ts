@@ -1,23 +1,11 @@
+import { UserEntity, UserEntityProps } from "../../domain/entities/user.entity";
 import { UserRepository } from "../../domain/repositories/user.repository";
 
 export class UpdateUserUseCase {
   constructor(private userRepo: UserRepository) {}
 
-  async execute(id: string, input: InputUpdateUser): Promise<boolean> {
-    const user = await this.userRepo.findById(id);
-
-    if (!user) throw new Error("User not found");
-
-    user.update(input);
-    const updated = await this.userRepo.update(id, user);
+  async execute(id: string, input: Partial<UserEntityProps>): Promise<boolean> {
+    const updated = await this.userRepo.update(id, input);
     return updated;
   }
 }
-
-type InputUpdateUser = {
-  username?: string;
-  email?: string;
-  image?: string;
-  phone?: string;
-  password?: string;
-};

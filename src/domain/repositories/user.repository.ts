@@ -1,8 +1,12 @@
 import { UserEntity, UserEntityProps } from "../entities/user.entity";
 
 export interface UserRepository {
-  insert(user: UserEntity): Promise<UserEntityProps>;
-  update(id: string, user: UserEntity): Promise<boolean>;
-  findById(id: string): Promise<UserEntity>;
-  findByEmail(email: string): Promise<UserEntityProps>;
+  insert(user: UserEntity): Promise<UserOutputDto>;
+  update(id: string, user: Partial<UserEntityProps>): Promise<boolean>;
+  findById(id: string): Promise<UserOutputDto>;
+  findByEmail(email: string): Promise<UserOutputDto>;
+}
+
+export interface UserOutputDto extends UserEntityProps {
+  _id: string;
 }

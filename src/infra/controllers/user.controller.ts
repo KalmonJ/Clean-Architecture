@@ -20,7 +20,7 @@ export class UserController {
 
       console.log(user, "usuáriooo");
 
-      // await this.createCartUserCase.execute({ owner: user.id, items: [] });
+      await this.createCartUserCase.execute({ owner: user._id, items: [] });
 
       // await this.sendMail.execute({
       //   from: "kalmonkk69@gmail.com",
@@ -31,7 +31,8 @@ export class UserController {
       // });
       return res.status(201).json(user);
     } catch (error: any) {
-      console.log(error, "errroooooooo");
+      console.log(error, "unknown erroro");
+
       return res.status(400).json(error);
     }
   }

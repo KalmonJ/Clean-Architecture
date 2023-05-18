@@ -15,7 +15,6 @@ const userSchema = z.object({
   phone: z.string().refine((val) => /\(\d{2}\) \d{5}-\d{4}/g.test(val), {
     message: ErrorMessages.INVALID_PHONE_NUMBER,
   }),
-  id: z.string().uuid({ message: ErrorMessages.INVALID_IDENTIFIER }),
 });
 
 export type UserEntityProps = z.infer<typeof userSchema>;
@@ -48,7 +47,6 @@ export class UserEntity {
       username: this.props.username,
       image: this.props.image,
       email: this.props.email,
-      id: this.props.id,
       phone: this.props.phone,
     };
   }

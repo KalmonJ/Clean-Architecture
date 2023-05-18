@@ -10,7 +10,10 @@ export class CreateCartUseCase {
   ) {}
 
   async execute(input: InputCart): Promise<void> {
-    const cart = new CartEntity({ ...input, id: this.idGenerate.generate() });
+    const cart = new CartEntity({ ...input });
+
+    console.log(cart, "carrinho");
+
     await this.cartRepo.insert(cart);
   }
 }

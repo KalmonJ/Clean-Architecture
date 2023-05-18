@@ -16,7 +16,7 @@ export class StripeAdapter implements StripeInterface {
         await this.stripe.products.create({
           name: item.name,
           active: true,
-          id: item.id,
+          id: item._id,
           images: [item.image ?? ""],
           description: item.description,
           shippable: true,

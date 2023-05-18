@@ -2,8 +2,8 @@ import mongoose from "mongoose";
 
 const Schema = new mongoose.Schema(
   {
-    id: { type: String, required: true },
-    owner: { type: String, required: true },
+    _id: { type: String, required: true },
+    owner: { type: mongoose.Schema.Types.ObjectId, ref: "Users" },
     items: { type: Array, required: true },
     vat: { type: Number, required: true },
     total: { type: Number, required: true },

@@ -3,7 +3,11 @@ import { CartEntity, CartEntityProps } from "../entities/cart.entity";
 
 export interface CartRepository {
   insert(cart: CartEntity): Promise<void>;
-  getById(input: string): Promise<CartEntityProps | null>;
-  update(id: string, input: CartEntity): Promise<CartEntityProps | null>;
-  findByOwner(owner: string): Promise<CartEntityProps | null>;
+  getById(input: string): Promise<CartOutputDto | null>;
+  update(id: string, input: CartEntity): Promise<CartOutputDto | null>;
+  findByOwner(owner: string): Promise<CartOutputDto | null>;
+}
+
+export interface CartOutputDto extends CartEntityProps {
+  _id: string;
 }
