@@ -9,8 +9,7 @@ import {
 export class CreateUserUseCase {
   constructor(
     private userRepo: UserRepository,
-    private hashService: HashPasswordInterface,
-    private idGenerate: IdGeneratorInterface
+    private hashService: HashPasswordInterface
   ) {}
 
   async execute(input: InputUser): Promise<UserOutputDto> {

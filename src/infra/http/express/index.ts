@@ -5,7 +5,6 @@ import { CreateUserUseCase } from "../../../application/usecases/create-user.use
 import { UpdateProductUseCase } from "../../../application/usecases/update-product.use-case";
 import { UpdateUserUseCase } from "../../../application/usecases/update-user.use-case";
 import { HashPassword } from "../../security/hash-password";
-import { IdGenerator } from "../../../domain/services/id-generator";
 import { UserController } from "../../controllers/user.controller";
 import { ProductInMemoryRepository } from "../../repositories/memory/product-in-memory-repository";
 import { UserInMemoryRepository } from "../../repositories/memory/user-in-memory-repository";
@@ -42,16 +41,13 @@ const cartRepo = new CartDataBaseRepository();
 const orderRepo = new OrderDataBaseRepository();
 const productStrategy = new WeekProductsStrategy();
 const hashService = new HashPassword();
-const idGenerate = new IdGenerator();
 const auth = new Auth();
 const sendMail = new Mail();
 
 const container = {
-  orderController: new OrderController(
-    new CreateOrderUseCase(orderRepo, idGenerate)
-  ),
+  orderController: new OrderController(new CreateOrderUseCase(orderRepo)),
   cartController: new CartController(
-    new CreateCartUseCase(cartRepo, idGenerate),
+    new CreateCartUseCase(cartRepo),
     new GetCartUseCase(cartRepo),
     new UpdateCartUseCase(cartRepo)
   ),
@@ -60,13 +56,13 @@ const container = {
   ),
 
   userController: new UserController(
-    new CreateUserUseCase(userRepo, hashService, idGenerate),
+    new CreateUserUseCase(userRepo, hashService),
     new UpdateUserUseCase(userRepo),
-    new CreateCartUseCase(cartRepo, idGenerate),
+    new CreateCartUseCase(cartRepo),
     new SendEmailRegisterUseCase(sendMail)
   ),
   productController: new ProductController(
-    new CreateProductUseCase(productRepo, idGenerate),
+    new CreateProductUseCase(productRepo),
     new UpdateProductUseCase(productRepo),
     new GetAllProductsByCategoryUseCase(productRepo, productStrategy),
     new GetAllProductsOfTheWeekUseCase(productRepo, productStrategy),

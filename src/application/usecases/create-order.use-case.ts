@@ -2,14 +2,10 @@ import {
   OrderEntity,
   OrderEntityProps,
 } from "../../domain/entities/order.entity";
-import { IdGeneratorInterface } from "../../domain/interfaces/id-generator.interface";
 import { OrderRepository } from "../../domain/repositories/order.repository";
 
 export class CreateOrderUseCase {
-  constructor(
-    private orderRepo: OrderRepository,
-    private idGenerate: IdGeneratorInterface
-  ) {}
+  constructor(private orderRepo: OrderRepository) {}
 
   async execute(input: InputCreateOrder): Promise<void> {
     const order = new OrderEntity({
